@@ -1,0 +1,1491 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>バハイ・ウサギ｜南の島の家事代行おねがい所 🐰🌴</title>
+<style>
+  :root{
+    --org:#FF4FA3;--org-deep:#0B7E84;--gold:#FFC93C;
+    --cream:#EAFBF8;--cream-2:#FFE3F1;--ink:#26413F;--ink-soft:#5E7C79;
+    --line:#BFE9E4;--ok:#23B26B;--warn:#E0524A;--shadow:0 12px 30px rgba(17,166,166,.16);
+    --sea:#11A6A6;--aqua:#46D0C8;--coral:#FF6B3D;--card:#fff;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:"Hiragino Maru Gothic ProN","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+    color:var(--ink);
+    background:
+      radial-gradient(circle at 8% 0%, #BFF6EC 0, transparent 42%),
+      radial-gradient(circle at 96% 4%, #FFD6EC 0, transparent 38%),
+      radial-gradient(circle at 78% 96%, #C7EEFF 0, transparent 46%),
+      radial-gradient(circle at 18% 100%, #FFE9A8 0, transparent 40%),
+      linear-gradient(180deg,#F1FCFB,#FFF6FB);
+    background-attachment:fixed;
+    min-height:100vh;line-height:1.7;-webkit-font-smoothing:antialiased;}
+
+  /* 🌅 朝 */
+  body.t-asa{
+    --org:#FF8FA3;--org-deep:#E0743C;--gold:#FFCF86;
+    --cream:#FFF1EC;--cream-2:#FFE3DC;--ink:#4A3A36;--ink-soft:#8C766E;
+    --line:#F2DCD0;--shadow:0 12px 30px rgba(255,150,120,.16);--card:#fff;
+    background:
+      radial-gradient(circle at 12% 0%, #FFE2C2 0, transparent 44%),
+      radial-gradient(circle at 92% 6%, #FFD3DD 0, transparent 40%),
+      radial-gradient(circle at 80% 96%, #DCEBFF 0, transparent 46%),
+      linear-gradient(180deg,#FFF6F0,#FBF3FF);
+    background-attachment:fixed;}
+  /* 🌙 夜 */
+  body.t-yoru{
+    --org:#FF5FA8;--org-deep:#4FE0D2;--gold:#FFD24D;
+    --cream:#16323B;--cream-2:#24414A;--ink:#E7F4F2;--ink-soft:#9DBDBA;
+    --line:#2C5159;--shadow:0 14px 34px rgba(0,0,0,.45);--card:#142A31;
+    color:var(--ink);
+    background:
+      radial-gradient(circle at 10% 0%, #123A47 0, transparent 46%),
+      radial-gradient(circle at 92% 8%, #3A1E3A 0, transparent 42%),
+      radial-gradient(circle at 80% 96%, #0E2A3A 0, transparent 48%),
+      linear-gradient(180deg,#0C1E25,#15101F);
+    background-attachment:fixed;}
+  .wrap{max-width:860px;margin:0 auto;padding:24px 18px 80px;}
+  header{text-align:center;margin-bottom:16px;}
+  .bunny{font-size:40px;line-height:1;}
+  h1{font-size:clamp(20px,4.6vw,28px);margin:8px 0 6px;letter-spacing:.02em;color:var(--org-deep);}
+  .tagline{color:var(--ink-soft);font-size:13px;margin:0;}
+  .tagline b{color:var(--org);}
+  .deco{margin-top:8px;font-size:16px;letter-spacing:5px;filter:saturate(1.15);}
+  .joke{margin:6px 0 0;font-size:11.5px;color:var(--ink-soft);}
+  h1 .rom{font-size:.6em;color:var(--ink-soft);font-weight:700;letter-spacing:.04em;}
+  .meaning{margin:4px 0 0;font-size:11.5px;color:var(--ink-soft);}
+  .meaning b{color:var(--org-deep);}
+  /* 動く海 & 泳ぐお魚 */
+  .ocean{position:relative;height:50px;margin:6px 0 16px;border-radius:16px;overflow:hidden;
+    background:linear-gradient(180deg, rgba(70,208,200,.05), rgba(17,166,166,.22));
+    border:1px solid var(--line);}
+  .ocean .waves{position:absolute;left:0;bottom:-2px;width:200%;height:16px;
+    background:radial-gradient(circle at 12px -6px, transparent 9px, rgba(17,166,166,.30) 10px) repeat-x;
+    background-size:24px 16px; animation:wave 5s linear infinite;}
+  .ocean .waves::after{content:"";position:absolute;left:0;bottom:6px;width:100%;height:12px;
+    background:radial-gradient(circle at 9px -5px, transparent 7px, rgba(255,201,60,.25) 8px) repeat-x;
+    background-size:18px 12px; animation:wave 7s linear infinite reverse;}
+  @keyframes wave{from{transform:translateX(0)} to{transform:translateX(-24px)}}
+  .fish{position:absolute;font-size:18px;will-change:left,transform;}
+  .fish.s1{top:5px; left:110%; animation:swimL 13s linear infinite, bob 2.6s ease-in-out infinite;}
+  .fish.s2{top:22px; left:110%; font-size:15px; animation:swimL 18s linear infinite 3s, bob 3.1s ease-in-out infinite;}
+  .fish.s3{top:14px; left:110%; animation:swimL 10s linear infinite 6s, bob 2.2s ease-in-out infinite;}
+  .fish.s4{top:26px; left:110%; font-size:16px; animation:swimL 22s linear infinite 1.5s, bob 3.6s ease-in-out infinite;}
+  .fish.s5{top:8px; left:110%; font-size:20px; animation:swimL 16s linear infinite 9s, bob 2.9s ease-in-out infinite;}
+  @keyframes swimL{from{left:110%} to{left:-14%}}
+  @keyframes bob{0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px)}}
+  @media (prefers-reduced-motion: reduce){
+    .ocean .waves,.ocean .waves::after,.fish{animation:none !important;}
+    .fish.s1{left:8%}.fish.s2{left:30%}.fish.s3{left:52%}.fish.s4{left:72%}.fish.s5{left:88%}
+  }
+  .themebar{display:flex;gap:6px;justify-content:center;margin-bottom:12px;}
+  .themebar button{border:1.5px solid var(--line);background:var(--card);color:var(--ink-soft);
+    font-family:inherit;font-weight:700;font-size:12.5px;padding:6px 13px;border-radius:999px;cursor:pointer;transition:.15s;}
+  .themebar button.on{background:linear-gradient(135deg,var(--org),var(--gold));color:#fff;border-color:transparent;}
+
+  /* tab bar */
+  .appbar{display:flex;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:16px;
+    padding:6px;margin-bottom:18px;box-shadow:var(--shadow);}
+  .appbar button{flex:1;border:none;cursor:pointer;font-family:inherit;font-weight:800;font-size:15px;
+    padding:13px;border-radius:11px;background:transparent;color:var(--ink-soft);transition:.15s;}
+  .appbar button.on{background:linear-gradient(135deg,var(--org),var(--gold));color:#fff;
+    box-shadow:0 6px 16px rgba(232,101,26,.3);}
+
+  .view{display:none;}
+  .view.on{display:block;animation:fade .3s ease;}
+  @keyframes fade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+  @keyframes pop{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
+
+  /* ===== shared components ===== */
+  .card{background:var(--card);border:1px solid var(--line);border-radius:20px;
+    padding:22px 20px;margin-bottom:18px;box-shadow:var(--shadow);scroll-margin-top:60px;}
+  .card h2{font-size:16px;margin:0 0 12px;display:flex;align-items:center;gap:9px;}
+  .card .sub{color:var(--ink-soft);font-size:12.5px;margin:-6px 0 16px;}
+  .howto .howsteps{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:2px;}
+  .howto .hstep{background:var(--cream);border:1px solid var(--line);border-radius:14px;padding:12px 13px;}
+  .howto .hn{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;
+    background:var(--org);color:#fff;font-weight:800;font-size:13px;margin-bottom:6px;}
+  .howto .ht{font-weight:800;font-size:13.5px;color:var(--org-deep);}
+  .howto .hd{font-size:12px;color:var(--ink-soft);margin-top:2px;}
+  .howto .howcan{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px;}
+  .howto .howcan span{background:var(--cream-2);border:1px solid var(--line);border-radius:999px;
+    padding:5px 11px;font-size:12px;color:var(--org-deep);font-weight:600;}
+  .howto .howtip{margin-top:12px;background:var(--cream-2);border:1px dashed var(--gold);border-radius:12px;
+    padding:10px 12px;font-size:12.5px;color:var(--org-deep);}
+  .fnamerow{margin-top:12px;}
+  .fnamerow input{width:100%;padding:10px 11px;border:1.5px solid var(--line);border-radius:11px;
+    font-family:inherit;font-size:14px;color:var(--ink);background:var(--cream);}
+  .fnamerow .fprev{font-size:12px;color:var(--ink-soft);margin:6px 0 0;}
+  .num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;
+    border-radius:50%;background:var(--org);color:#fff;font-size:13px;font-weight:700;flex:none;}
+  .label{font-size:13px;font-weight:700;color:var(--ink-soft);margin:14px 0 8px;display:block;}
+  .chips{display:flex;gap:8px;flex-wrap:wrap;}
+  .chip{position:relative;cursor:pointer;}
+  .chip input{position:absolute;opacity:0;}
+  .chip span{display:inline-block;padding:7px 14px;border-radius:999px;border:1.5px solid var(--line);
+    background:var(--cream);font-size:13.5px;font-weight:600;transition:.15s;}
+  .chip input:checked + span{background:var(--org);border-color:var(--org);color:#fff;}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  @media(max-width:560px){.grid{grid-template-columns:1fr;}}
+  .field label{font-size:13px;font-weight:700;color:var(--ink-soft);display:block;margin-bottom:5px;}
+  input[type=text],input[type=date],input[type=time],select,textarea{
+    width:100%;padding:11px 12px;border:1.5px solid var(--line);border-radius:12px;
+    font-family:inherit;font-size:14.5px;color:var(--ink);background:var(--cream);}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--org);background:var(--card);}
+  textarea{resize:vertical;min-height:62px;}
+  .hidden{display:none;}
+  .gen{width:100%;border:none;cursor:pointer;background:linear-gradient(135deg,var(--org),var(--gold));
+    color:#fff;font-size:16px;font-weight:800;letter-spacing:.03em;padding:16px;border-radius:15px;
+    box-shadow:0 8px 22px rgba(232,101,26,.32);transition:.15s;font-family:inherit;}
+  .gen:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(232,101,26,.42);}
+  .gen:active{transform:translateY(0);} .gen:disabled{opacity:.7;cursor:wait;transform:none;}
+  pre.out{white-space:pre-wrap;word-break:break-word;background:var(--cream);border:1px dashed var(--gold);
+    border-radius:14px;padding:18px;font-family:inherit;font-size:14.5px;margin:14px 0 0;min-height:40px;}
+  .copy{width:100%;border:2px solid var(--org);background:var(--card);color:var(--org-deep);font-weight:800;
+    font-size:15px;padding:13px;border-radius:14px;cursor:pointer;font-family:inherit;margin-top:10px;transition:.15s;}
+  .copy:hover{background:var(--cream-2);} .copy.done{background:var(--ok);border-color:var(--ok);color:#fff;}
+
+  /* ===== generator-specific ===== */
+  .seg{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:2px;}
+  .seg label{flex:1;min-width:130px;cursor:pointer;}
+  .seg input{position:absolute;opacity:0;}
+  .seg span{display:block;text-align:center;padding:14px 10px;border:2px solid var(--line);
+    border-radius:14px;font-weight:700;transition:.15s;background:var(--cream);}
+  .seg .emo{font-size:22px;display:block;margin-bottom:4px;}
+  .seg input:checked + span{border-color:var(--org);background:var(--cream-2);
+    color:var(--org-deep);box-shadow:0 4px 12px rgba(232,101,26,.18);}
+  .subtabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:6px;}
+  .subtabs label{flex:1;min-width:110px;cursor:pointer;}
+  .subtabs input{position:absolute;opacity:0;}
+  .subtabs span{display:block;text-align:center;padding:11px 8px;border:2px solid var(--line);
+    border-radius:12px;font-weight:700;font-size:13.5px;background:var(--cream);transition:.15s;}
+  .subtabs input:checked + span{border-color:var(--org);background:var(--cream-2);color:var(--org-deep);}
+  .ai-row{display:flex;align-items:center;justify-content:space-between;gap:12px;
+    background:var(--cream-2);border:1.5px dashed var(--gold);border-radius:14px;padding:13px 16px;}
+  .ai-row .lab{font-weight:800;font-size:14.5px;}
+  .ai-row .hint{font-size:11.5px;color:var(--ink-soft);font-weight:500;}
+  .switch{position:relative;width:52px;height:30px;flex:none;cursor:pointer;}
+  .switch input{position:absolute;opacity:0;}
+  .switch .track{position:absolute;inset:0;background:#D9C4A4;border-radius:999px;transition:.2s;}
+  .switch .knob{position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;
+    background:#fff;transition:.2s;box-shadow:0 2px 5px rgba(0,0,0,.2);}
+  .switch input:checked + .track{background:var(--org);}
+  .switch input:checked + .track + .knob{transform:translateX(22px);}
+  .out-card{display:none;} .out-card.show{display:block;animation:pop .35s ease;}
+  .out-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px;}
+  .out-head h2{margin:0;}
+  .tone{display:flex;gap:6px;}
+  .tone button{border:1.5px solid var(--line);background:var(--cream);cursor:pointer;padding:6px 12px;
+    border-radius:999px;font-size:12.5px;font-weight:700;color:var(--ink-soft);font-family:inherit;transition:.15s;}
+  .tone button.on{background:var(--org);border-color:var(--org);color:#fff;}
+  .badge{display:inline-block;font-size:11px;font-weight:800;padding:2px 9px;border-radius:999px;margin-bottom:10px;}
+  .badge.ai{background:#E9F3EC;color:var(--ok);border:1px solid #BFE0C9;}
+  .badge.rule{background:var(--cream-2);color:var(--org-deep);border:1px solid var(--gold);}
+
+  /* ===== manual-specific ===== */
+  nav.jump{position:sticky;top:0;z-index:5;display:flex;gap:7px;flex-wrap:wrap;justify-content:center;
+    padding:10px 0;margin-bottom:14px;background:linear-gradient(var(--cream),rgba(255,247,236,.85));backdrop-filter:blur(4px);}
+  nav.jump a{text-decoration:none;font-size:13px;font-weight:700;color:var(--org-deep);
+    background:var(--card);border:1.5px solid var(--line);padding:6px 12px;border-radius:999px;transition:.15s;}
+  nav.jump a:hover{background:var(--cream-2);border-color:var(--gold);}
+  .steps{list-style:none;margin:0;padding:0;position:relative;}
+  .steps li{position:relative;padding:0 0 18px 46px;}
+  .steps li:last-child{padding-bottom:0;}
+  .steps li::before{content:attr(data-n);position:absolute;left:0;top:0;width:32px;height:32px;
+    border-radius:50%;background:linear-gradient(135deg,var(--org),var(--gold));color:#fff;
+    font-weight:800;display:flex;align-items:center;justify-content:center;font-size:15px;}
+  .steps li::after{content:"";position:absolute;left:15px;top:34px;bottom:2px;width:2px;background:var(--line);}
+  .steps li:last-child::after{display:none;}
+  .steps b{display:block;font-size:15px;} .steps small{color:var(--ink-soft);}
+  .prog-wrap{background:var(--cream);border-radius:999px;height:12px;overflow:hidden;margin:4px 0;}
+  .prog{height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--org));transition:.3s;}
+  .prog-txt{font-size:12.5px;font-weight:700;color:var(--org-deep);margin-bottom:14px;}
+  .todo-group{margin-bottom:14px;}
+  .todo-group h3{font-size:13.5px;color:var(--ink-soft);margin:0 0 7px;border-left:4px solid var(--gold);padding-left:8px;}
+  .todo label{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border-radius:10px;cursor:pointer;transition:.12s;}
+  .todo label:hover{background:var(--cream);}
+  .todo input{width:19px;height:19px;margin-top:2px;accent-color:var(--org);flex:none;}
+  .todo input:checked + span{color:var(--ink-soft);text-decoration:line-through;}
+  ul.dot{margin:0;padding-left:20px;} ul.dot li{margin-bottom:7px;} ul.dot b{color:var(--org-deep);}
+  .warn-box{background:#FDECEA;border:1.5px solid #F1B0A6;border-radius:14px;padding:14px 16px;}
+  .warn-box ul{margin:0;padding-left:20px;} .warn-box li{margin-bottom:8px;} .warn-box b{color:var(--warn);}
+  details{border:1.5px solid var(--line);border-radius:12px;margin-bottom:10px;background:var(--cream);overflow:hidden;}
+  details[open]{background:var(--card);border-color:var(--gold);}
+  summary{cursor:pointer;padding:13px 16px;font-weight:700;font-size:14.5px;list-style:none;display:flex;justify-content:space-between;gap:10px;}
+  summary::-webkit-details-marker{display:none;}
+  summary::after{content:"＋";color:var(--org);font-weight:800;}
+  details[open] summary::after{content:"−";}
+  details .body{padding:0 16px 15px;font-size:14px;} details .body a{color:var(--org-deep);}
+  .stars{display:flex;gap:6px;flex-wrap:wrap;}
+  .stars label{cursor:pointer;} .stars input{position:absolute;opacity:0;}
+  .stars span{display:inline-block;padding:8px 12px;border:1.5px solid var(--line);border-radius:10px;
+    font-weight:700;font-size:13.5px;background:var(--cream);transition:.12s;}
+  .stars input:checked + span{background:var(--org);border-color:var(--org);color:#fff;}
+
+  /* memo handover buttons */
+  .btn-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;}
+  .btn-row button{flex:1;min-width:120px;border:2px solid var(--gold);background:var(--card);color:var(--org-deep);
+    font-weight:800;font-size:14px;padding:12px;border-radius:13px;cursor:pointer;font-family:inherit;transition:.15s;}
+  .btn-row button:hover{background:var(--cream-2);}
+  .btn-row button.done{background:var(--ok);border-color:var(--ok);color:#fff;}
+  .memo-blk{margin-top:16px;}
+  .memo-blk h3{font-size:14px;color:var(--org-deep);margin:0 0 6px;display:flex;align-items:center;gap:7px;}
+
+  /* work log */
+  input[type=number]{width:100%;padding:11px 12px;border:1.5px solid var(--line);border-radius:12px;
+    font-family:inherit;font-size:14.5px;color:var(--ink);background:var(--cream);}
+  input[type=number]:focus{outline:none;border-color:var(--org);background:var(--card);}
+  .logrow{display:flex;gap:8px;align-items:center;margin-bottom:8px;}
+  .logrow .lname{flex:1;min-width:0;}
+  .logrow .lplan,.logrow .lact{width:78px;flex:none;}
+  .logrow .lrm{flex:none;width:40px;border:1.5px solid var(--line);background:var(--cream);border-radius:10px;
+    cursor:pointer;font-weight:800;color:var(--ink-soft);font-family:inherit;padding:11px 0;transition:.12s;}
+  .logrow .lrm:hover{border-color:#F1B0A6;color:var(--warn);}
+  .loghead{display:flex;gap:8px;font-size:11px;color:var(--ink-soft);font-weight:700;margin-bottom:5px;padding:0 2px;}
+  .loghead .c1{flex:1;} .loghead .c2,.loghead .c3{width:78px;text-align:center;} .loghead .c4{width:40px;}
+  .log-total{margin-top:8px;font-weight:800;color:var(--org-deep);font-size:14px;}
+  .bar-row{display:flex;align-items:center;gap:8px;margin:5px 0;font-size:12.5px;}
+  .bar-row .nm{width:34%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .bar-track{position:relative;flex:1;background:var(--cream);border-radius:6px;height:16px;overflow:hidden;}
+  .bar-plan{display:block;position:absolute;left:0;top:0;height:100%;background:var(--gold);opacity:.4;}
+  .bar-fill{display:block;position:absolute;left:0;top:0;height:100%;background:linear-gradient(90deg,var(--gold),var(--org));transition:.25s;}
+  .bar-row .mn{width:122px;text-align:right;color:var(--ink-soft);font-weight:700;white-space:nowrap;}
+
+  /* print / PDF */
+  .print-area{display:none;}
+  @media print{
+    body{background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    .wrap{display:none !important;}
+    .print-area{display:block;padding:0;}
+    .ptitle{font-size:17pt;font-weight:800;margin:0 0 4px;color:#C9510F;}
+    .psub{font-size:9pt;color:#6E5A47;margin:0 0 14px;}
+    .pmemo{page-break-inside:avoid;border:1px solid #C9510F;border-radius:9px;padding:13px 16px;margin:0 0 14px;}
+    .pmemo h3{margin:0 0 8px;color:#C9510F;font-size:13.5pt;border-bottom:2px solid #E5A93B;padding-bottom:5px;}
+    .pmemo .row{margin:3px 0;font-size:10.5pt;line-height:1.55;}
+    .pmemo .row b{color:#3A2A1C;}
+    .pmemo .chk{display:flex;gap:8px;align-items:flex-start;margin:3px 0;font-size:10.5pt;}
+    .pmemo .chk .b{width:12px;height:12px;border:1.5px solid #333;border-radius:2px;margin-top:2px;flex:none;}
+    .pbar{display:flex;align-items:center;gap:8px;margin:3px 0;font-size:10pt;}
+    .pbar .nm{width:40%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+    .pbar .tr{flex:1;height:12px;background:#FBE7CE;border-radius:4px;overflow:hidden;}
+    .pbar .fl{display:block;height:100%;background:#E8651A;}
+    .pbar .mn{width:120px;text-align:right;color:#6E5A47;}
+    @page{size:A4;margin:14mm;}
+  }
+  footer{text-align:center;color:var(--ink-soft);font-size:12px;margin-top:24px;}
+  footer .ver{display:inline-block;margin-top:6px;font-size:10.5px;opacity:.7;letter-spacing:.02em;}
+</style>
+</head>
+<body class="t-hiru">
+<div class="wrap">
+  <header>
+    <div class="bunny">🐰🌴</div>
+    <h1>バハイ・ウサギ <span class="rom">(Bahay Usagi)</span> 🐰🌴</h1>
+    <p class="tagline"><b>南の島の家事代行おねがい所</b>　〜 面白きこともなき世を面白く 〜</p>
+    <p class="meaning"><b>Bahay（バハイ）</b>＝タガログ語で「家・お家」／ <b>Usagi</b>＝うさぎ 🐇</p>
+    <div class="deco">🌺 🌊 🐰 🌸 🐚 🌴 🌺</div>
+    <p class="joke">🐟 お魚は泳ぐだけでお手伝いしません（見守り担当）</p>
+  </header>
+
+  <div class="ocean" aria-hidden="true">
+    <div class="waves"></div>
+    <span class="fish s1">🐟</span>
+    <span class="fish s2">🐠</span>
+    <span class="fish s3">🐡</span>
+    <span class="fish s4">🐙</span>
+    <span class="fish s5">🐬</span>
+  </div>
+
+  <div class="themebar">
+    <button id="th-asa" data-t="asa" onclick="setTheme('asa')">🌅 朝</button>
+    <button id="th-hiru" data-t="hiru" onclick="setTheme('hiru')">☀️ 昼</button>
+    <button id="th-yoru" data-t="yoru" onclick="setTheme('yoru')">🌙 夜</button>
+  </div>
+
+  <div class="appbar">
+    <button id="tab-gen" class="on" onclick="showView('gen')">✍️ 依頼ジェネレーター</button>
+    <button id="tab-man" onclick="showView('man')">📖 手順書・マニュアル</button>
+    <button id="tab-memo" onclick="showView('memo')">👤 お渡しメモ</button>
+    <button id="tab-log" onclick="showView('log')">📊 作業ログ</button>
+  </div>
+
+  <!-- ============ 依頼ジェネレーター ============ -->
+  <div id="genView" class="view on">
+
+    <div class="card">
+      <h2><span class="num">0</span>何をしたい？</h2>
+      <div class="seg">
+        <label><input type="radio" name="mode" value="new" checked onchange="switchMode()">
+          <span><span class="emo">🆕</span>新規依頼</span></label>
+        <label><input type="radio" name="mode" value="follow" onchange="switchMode()">
+          <span><span class="emo">🔁</span>フォロー文<br><small style="font-weight:600;font-size:11px;">再依頼・調整・お断り</small></span></label>
+      </div>
+    </div>
+
+    <div id="newMode">
+      <div class="card">
+        <h2><span class="num">1</span>どちらを頼みたい？</h2>
+        <div class="seg">
+          <label><input type="radio" name="kind" value="house" checked onchange="switchKind()">
+            <span><span class="emo">🧹</span>家事代行</span></label>
+          <label><input type="radio" name="kind" value="errand" onchange="switchKind()">
+            <span><span class="emo">🏃</span>雑用代行</span></label>
+        </div>
+        <span class="label">お願いしたい内容（複数選択OK）</span>
+        <div class="chips" id="taskChips"></div>
+      </div>
+
+      <div class="card">
+        <h2><span class="num">2</span>依頼者ペルソナ（あなたの状況）</h2>
+        <span class="label">いちばん近いものを選ぶ</span>
+        <div class="chips" id="personaChips">
+          <label class="chip"><input type="radio" name="persona" value="共働きで時間がなく、効率重視。手早く要点だけ伝えたい。" checked><span>⏰ 共働き・時短</span></label>
+          <label class="chip"><input type="radio" name="persona" value="代行サービスを使うのが初めてで、少し不安。ていねいに相談したい。"><span>🌱 初めて・不安</span></label>
+          <label class="chip"><input type="radio" name="persona" value="ビジネスライクに、簡潔で無駄のないやり取りを好む。"><span>💼 ビジネスライク</span></label>
+          <label class="chip"><input type="radio" name="persona" value="高齢で、ていねいで分かりやすいやり取りを希望する。"><span>🍵 ていねい重視</span></label>
+          <label class="chip"><input type="radio" name="persona" value="コストを重視し、必要なことをはっきり伝えたい。"><span>💰 コスト重視</span></label>
+          <label class="chip"><input type="radio" name="persona" value="出産直後・育児中で、まとまった時間が取りにくい。"><span>👶 育児中</span></label>
+        </div>
+        <span class="label">補足（任意・自由記入）</span>
+        <textarea id="personaNote" placeholder="例：高齢の母の家事を代わりに手配しています。連絡は基本LINEで。"></textarea>
+      </div>
+
+      <div class="card">
+        <h2><span class="num">3</span>条件を教えてください</h2>
+        <div class="grid">
+          <div class="field"><label>エリア・最寄り</label><input type="text" id="area" placeholder="例：世田谷区／〇〇駅 徒歩5分"></div>
+          <div class="field"><label>希望日</label><input type="date" id="date"></div>
+          <div class="field"><label>希望時間帯</label><input type="text" id="time" placeholder="例：午前中／14:00〜16:00"></div>
+          <div class="field"><label>想定の所要時間</label>
+            <select id="hours"><option value="">指定なし</option><option>1時間程度</option><option>2時間程度</option>
+              <option>3時間程度</option><option>半日（4時間前後）</option><option>1日（6時間以上）</option></select></div>
+          <div class="field"><label>頻度</label>
+            <select id="freq"><option>今回のみ（単発）</option><option>週1回 定期</option><option>隔週 定期</option>
+              <option>月1〜2回 定期</option><option>まずはお試し → 定期検討</option></select></div>
+          <div class="field"><label>ご予算（任意）</label><input type="text" id="budget" placeholder="例：1回 5,000円前後"></div>
+        </div>
+        <span class="label">事前に伝えておきたいこと</span>
+        <div class="chips" id="noteChips">
+          <label class="chip"><input type="checkbox" value="ペットがいます（犬／猫など）"><span>🐾 ペットあり</span></label>
+          <label class="chip"><input type="checkbox" value="小さな子どもがいます"><span>👶 子どもあり</span></label>
+          <label class="chip"><input type="checkbox" value="アレルギーへの配慮をお願いします"><span>🤧 アレルギー配慮</span></label>
+          <label class="chip"><input type="checkbox" value="作業中は在宅しています"><span>🏠 在宅</span></label>
+          <label class="chip"><input type="checkbox" value="不在のため鍵のお預け対応を希望します"><span>🔑 不在・鍵預け</span></label>
+          <label class="chip"><input type="checkbox" value="掃除道具・洗剤はこちらで用意します"><span>🧴 道具あり</span></label>
+          <label class="chip"><input type="checkbox" value="女性スタッフを希望します"><span>👩 女性希望</span></label>
+          <label class="chip"><input type="checkbox" value="領収書の発行をお願いします"><span>🧾 領収書</span></label>
+        </div>
+        <span class="label">その他の要望・自由記入</span>
+        <textarea id="note" placeholder="例：水回りを重点的にお願いしたいです。"></textarea>
+      </div>
+    </div>
+
+    <div id="followMode" class="hidden">
+      <div class="card">
+        <h2><span class="num">1</span>どんな連絡？</h2>
+        <div class="subtabs" id="subtabs">
+          <label><input type="radio" name="sub" value="repeat" checked onchange="switchSub()"><span>🔁 再依頼</span></label>
+          <label><input type="radio" name="sub" value="reschedule" onchange="switchSub()"><span>📅 日程調整</span></label>
+          <label><input type="radio" name="sub" value="decline" onchange="switchSub()"><span>🙇 お断り・キャンセル</span></label>
+        </div>
+        <div class="field" style="margin-top:14px;"><label>サービス種別</label>
+          <select id="fKind"><option value="家事代行">家事代行</option><option value="雑用代行">雑用代行</option></select></div>
+
+        <div id="g-repeat">
+          <span class="label">担当スタッフのご希望</span>
+          <div class="chips">
+            <label class="chip"><input type="radio" name="staff" value="same" checked><span>🙆 同じ方をお願い</span></label>
+            <label class="chip"><input type="radio" name="staff" value="diff"><span>🔄 別の方に変更</span></label>
+            <label class="chip"><input type="radio" name="staff" value="any"><span>🤝 どちらでも</span></label>
+          </div>
+          <span class="label">今回の内容</span>
+          <div class="chips">
+            <label class="chip"><input type="radio" name="rcontent" value="same" checked onchange="toggleRchange()"><span>前回と同じ</span></label>
+            <label class="chip"><input type="radio" name="rcontent" value="change" onchange="toggleRchange()"><span>変更あり</span></label>
+          </div>
+          <textarea id="rChange" class="hidden" style="margin-top:8px;" placeholder="変更点を記入（例：今回はキッチンに加えて浴室もお願いしたいです）"></textarea>
+          <div class="grid" style="margin-top:12px;">
+            <div class="field"><label>次回の希望日時</label><input type="text" id="rDate" placeholder="例：来週の土曜 午前中"></div>
+            <div class="field"><label>前回の感想（任意）</label><input type="text" id="rFb" placeholder="例：とても助かりました"></div>
+          </div>
+        </div>
+
+        <div id="g-reschedule" class="hidden">
+          <div class="grid" style="margin-top:6px;">
+            <div class="field"><label>もとの予定（任意）</label><input type="text" id="sOld" placeholder="例：6/5（木）14:00 で予約中"></div>
+            <div class="field"><label>変更したい希望日時・候補</label><input type="text" id="sNew" placeholder="例：6/7 か 6/8 の午前で"></div>
+          </div>
+          <span class="label">理由（任意・ぼかしてOK）</span>
+          <input type="text" id="sReason" placeholder="例：急用が入ってしまい">
+        </div>
+
+        <div id="g-decline" class="hidden">
+          <div class="field" style="margin-top:6px;"><label>対象（いつの予定か）</label><input type="text" id="dTarget" placeholder="例：6/5（木）の予約"></div>
+          <span class="label">理由（任意・ぼかしてOK）</span>
+          <input type="text" id="dReason" placeholder="例：都合がつかなくなり">
+          <span class="label">今後について</span>
+          <div class="chips">
+            <label class="chip"><input type="radio" name="dFuture" value="again" checked><span>また利用したい</span></label>
+            <label class="chip"><input type="radio" name="dFuture" value="once"><span>今回限り</span></label>
+          </div>
+          <div class="chips" style="margin-top:8px;">
+            <label class="chip"><input type="checkbox" id="dLate"><span>⚠️ 直前の連絡（お詫びを強める）</span></label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="ai-row">
+        <div>
+          <div class="lab">🤖 AIで自然に仕上げる</div>
+          <div class="hint">ONで状況に合わせて文章を生成（Claude内で動作・失敗時は自動でルール生成に切替）</div>
+        </div>
+        <label class="switch"><input type="checkbox" id="aiToggle"><span class="track"></span><span class="knob"></span></label>
+      </div>
+    </div>
+
+    <button class="gen" id="genBtn" onclick="generate()">✨ 文章をつくる</button>
+
+    <div class="card out-card" id="outCard" style="margin-top:18px;">
+      <div class="out-head">
+        <h2>📝 できた文章</h2>
+        <div class="tone">
+          <button data-tone="polite" class="on" onclick="setTone('polite')">ていねい</button>
+          <button data-tone="casual" onclick="setTone('casual')">カジュアル</button>
+          <button data-tone="bullet" onclick="setTone('bullet')">箇条書き</button>
+        </div>
+      </div>
+      <span class="badge" id="badge"></span>
+      <pre class="out" id="out"></pre>
+      <button class="copy" id="copyBtn" onclick="copyOut()">📋 コピーする</button>
+    </div>
+  </div>
+
+  <!-- ============ マニュアル ============ -->
+  <div id="manView" class="view">
+    <nav class="jump">
+      <a href="#flow">📋 手順</a><a href="#todo">✅ ToDo</a><a href="#req">🗣 要望</a>
+      <a href="#warn">⚠️ 注意</a><a href="#help">🆘 困ったら</a><a href="#fb">⭐ FBレポ</a>
+    </nav>
+
+    <section class="card" id="flow">
+      <h2>📋 依頼の流れ（手順書）</h2>
+      <p class="sub">最初の予約から作業後まで、6ステップ。</p>
+      <ol class="steps">
+        <li data-n="1"><b>サービスを選ぶ</b><small>料金・対応エリア・損害補償（保険）の有無を確認。口コミも軽くチェック。</small></li>
+        <li data-n="2"><b>依頼文を送る</b><small>内容・希望日時・エリア・予算・事前共有事項を明記。→ 依頼ジェネレーターで作るとラク。</small></li>
+        <li data-n="3"><b>見積り・日程を確定</b><small>金額と所要時間、キャンセル規定を確認してから確定。</small></li>
+        <li data-n="4"><b>当日までに準備</b><small>道具の場所・鍵の受け渡し・触ってほしくない物を整理（→ToDo参照）。</small></li>
+        <li data-n="5"><b>作業当日</b><small>最初に優先順位を一言。在宅なら開始時にすり合わせると満足度が上がる。</small></li>
+        <li data-n="6"><b>フィードバック</b><small>よかった点・次回への要望を1分でメモして送る（→FBレポ）。</small></li>
+      </ol>
+    </section>
+
+    <section class="card" id="todo">
+      <h2>✅ 当日までのToDoチェックリスト</h2>
+      <p class="sub">チェックすると進み具合が表示されます。</p>
+      <div class="prog-wrap"><div class="prog" id="prog"></div></div>
+      <div class="prog-txt" id="progTxt">0 / 0 完了</div>
+      <div class="todo">
+        <div class="todo-group"><h3>📞 予約が決まったら</h3>
+          <label><input type="checkbox"><span>料金・所要時間・キャンセル規定を確認した</span></label>
+          <label><input type="checkbox"><span>損害補償（保険）の範囲を確認した</span></label>
+          <label><input type="checkbox"><span>当日の連絡手段（電話／アプリ）を確認した</span></label></div>
+        <div class="todo-group"><h3>🌙 前日まで</h3>
+          <label><input type="checkbox"><span>お願いする箇所・優先順位を整理した</span></label>
+          <label><input type="checkbox"><span>掃除道具・洗剤の場所をメモした（または用意）</span></label>
+          <label><input type="checkbox"><span>触ってほしくない物・立入NGの部屋を決めた</span></label>
+          <label><input type="checkbox"><span>不在の場合の鍵の受け渡し方法を決めた</span></label></div>
+        <div class="todo-group"><h3>☀️ 当日の朝</h3>
+          <label><input type="checkbox"><span>貴重品・現金を別の場所にしまった</span></label>
+          <label><input type="checkbox"><span>ペット・子どもの安全動線を確保した</span></label>
+          <label><input type="checkbox"><span>動かしてほしくない物に付箋やメモを貼った</span></label></div>
+        <div class="todo-group"><h3>🏁 作業後</h3>
+          <label><input type="checkbox"><span>仕上がりをざっと確認した</span></label>
+          <label><input type="checkbox"><span>よかった点・次回要望をメモした（FBレポへ）</span></label></div>
+      </div>
+    </section>
+
+    <section class="card" id="req">
+      <h2>🗣 要望の上手な伝え方</h2>
+      <p class="sub">「伝え方」で仕上がりがかなり変わります。</p>
+      <ul class="dot">
+        <li><b>優先順位を1〜3位で。</b>「時間が余ったら〇〇も」と幅を持たせると親切。</li>
+        <li><b>“やってほしい”だけでなく“やらなくていい”も。</b>NGゾーンを先に伝えると安心。</li>
+        <li><b>写真で共有。</b>気になる箇所・仕上がりイメージは画像が最速で正確。</li>
+        <li><b>抽象語を具体に。</b>「きれいに」→「水垢を落として鏡を曇りなく」。</li>
+        <li><b>道具・洗剤の指定があれば事前に。</b>素材や香りのこだわりは早めに共有。</li>
+        <li><b>感謝とセットで。</b>要望は「助かっています。次回は〇〇も」と前向きに。</li>
+      </ul>
+    </section>
+
+    <section class="card" id="warn">
+      <h2>⚠️ 注意ポイント</h2>
+      <p class="sub">トラブルを防ぐために、ここだけは。</p>
+      <div class="warn-box"><ul>
+        <li><b>貴重品・現金は必ず管理。</b>見える場所に置かず、自分でしまう。後の誤解も防げます。</li>
+        <li><b>鍵の受け渡しは記録を。</b>受け渡し方法・返却を文面で残す。スペアキー管理に注意。</li>
+        <li><b>損害補償の範囲を事前確認。</b>万一の破損時にどう対応されるかを把握しておく。</li>
+        <li><b>キャンセル料の発生時刻に注意。</b>「前日まで無料／当日〇%」など規定を要確認。</li>
+        <li><b>追加作業は口頭で増やさない。</b>時間・料金が変わるので、その場で合意を残す。</li>
+        <li><b>個人的な過度の依頼はNG。</b>契約範囲外の作業や私的な頼みごとは避ける。</li>
+      </ul></div>
+    </section>
+
+    <section class="card" id="help">
+      <h2>🆘 困ったときは</h2>
+      <p class="sub">よくある場面と、まずの一手。</p>
+      <details><summary>仕上がりが期待と違った</summary><div class="body">感情ではなく事実で。「ここをこうしてほしかった」を写真付きで具体的に運営へ連絡。次回への要望として伝えると角が立ちません。</div></details>
+      <details><summary>スタッフと相性が合わない</summary><div class="body">理由を細かく説明する必要はありません。次回の依頼で「別の方に変更」をお願いすればOK。→ ジェネレーターの再依頼モードが便利。</div></details>
+      <details><summary>時間内に終わらなそう</summary><div class="body">開始時に優先順位を共有しておくのが予防策。延長は料金が変わるので、その場で可否と追加料金を確認してから合意を。</div></details>
+      <details><summary>物を壊された／傷がついた</summary><div class="body">その場で写真を撮り、当日中に運営へ連絡。損害補償の対象かを確認します。時間が経つほど対応が難しくなるので早めに。</div></details>
+      <details><summary>急に行けなくなった／キャンセルしたい</summary><div class="body">キャンセル規定（無料の締切・当日料金）を確認のうえ、早めに連絡。→ ジェネレーターのお断り・キャンセルモードで文面が作れます。</div></details>
+      <details><summary>毎回同じ説明が面倒</summary><div class="body">依頼テンプレを保存しておき、定期依頼に。同じ担当者を指名すれば説明も最小限で済みます。</div></details>
+    </section>
+
+    <section class="card" id="fb">
+      <h2>⭐ FBレポ（1分）</h2>
+      <p class="sub">選ぶだけ。次回につながる短いフィードバックを作ります。</p>
+      <span class="label">満足度</span>
+      <div class="stars">
+        <label><input type="radio" name="sat" value="とても満足（★★★★★）" checked><span>★★★★★</span></label>
+        <label><input type="radio" name="sat" value="満足（★★★★）"><span>★★★★</span></label>
+        <label><input type="radio" name="sat" value="まずまず（★★★）"><span>★★★</span></label>
+        <label><input type="radio" name="sat" value="やや不満（★★）"><span>★★</span></label>
+      </div>
+      <span class="label">よかった点（複数OK）</span>
+      <div class="chips" id="goodChips">
+        <label class="chip"><input type="checkbox" value="仕上がりがとてもきれい"><span>仕上がり◎</span></label>
+        <label class="chip"><input type="checkbox" value="時間どおりで丁寧"><span>時間・丁寧さ</span></label>
+        <label class="chip"><input type="checkbox" value="気配り・対応が良かった"><span>気配り</span></label>
+        <label class="chip"><input type="checkbox" value="要望をよく汲んでくれた"><span>要望対応</span></label>
+        <label class="chip"><input type="checkbox" value="コミュニケーションが安心できた"><span>安心感</span></label>
+      </div>
+      <span class="label">次回への要望（複数OK・任意）</span>
+      <div class="chips" id="nextChips">
+        <label class="chip"><input type="checkbox" value="水回りをもう少し重点的に"><span>水回り重点</span></label>
+        <label class="chip"><input type="checkbox" value="このエリアを優先してほしい"><span>優先箇所</span></label>
+        <label class="chip"><input type="checkbox" value="次回も同じ方にお願いしたい"><span>同じ方希望</span></label>
+        <label class="chip"><input type="checkbox" value="開始時に段取りを相談したい"><span>段取り相談</span></label>
+      </div>
+      <span class="label">ひとこと（任意）</span>
+      <textarea id="fbFree" placeholder="例：助かりました。来週もよろしくお願いします。"></textarea>
+      <button class="gen" style="margin-top:16px;" onclick="makeFB()">⭐ FBレポを作る</button>
+      <pre class="out" id="fbOut" style="display:none;"></pre>
+      <button class="copy" id="fbCopy" style="display:none;" onclick="copyFB()">📋 コピーする</button>
+    </section>
+  </div>
+
+  <!-- ============ お渡しメモ ============ -->
+  <div id="memoView" class="view">
+    <div class="card howto">
+      <h2><span class="num">🐰</span>できること・使い方</h2>
+      <p class="sub">担当スタッフへ渡す「前日・当日・後日」メモを、3ステップで。</p>
+      <div class="howsteps">
+        <div class="hstep"><span class="hn">1</span><div class="ht">入力する</div><div class="hd">種別・担当の呼び方・作業時間・お願いごと・NGなどを記入。スタッフのタイプ（文系/理系・真面目/適当）も選べます。</div></div>
+        <div class="hstep"><span class="hn">2</span><div class="ht">作る</div><div class="hd">「✨メモ一式をつくる」。英語併記・記入欄つきも選択可。AIなしでも整ったテンプレが出ます。</div></div>
+        <div class="hstep"><span class="hn">3</span><div class="ht">渡す・残す</div><div class="hd">印刷／PDF、または Markdown / PDF(html) / CSV / メモ(txt) で保存。ファイル名は日付つきで自動命名。</div></div>
+      </div>
+      <div class="howcan">
+        <span>📨 前日メモ</span><span>📋 当日メモ（チェック欄つき可）</span><span>💌 後日メモ（お礼・FB）</span>
+        <span>🌐 英語併記</span><span>🖨 印刷／PDF</span><span>⬇️ 4形式ダウンロード</span>
+      </div>
+      <div class="howtip">💡 自動ファイル名は「日付_名前_種類_テーマ」。任意の名前もつけられます。長期保存・共有は CSV / Markdown が確実です 🐰</div>
+    </div>
+    <div class="card">
+      <h2><span class="num">★</span>ご担当者様へのお渡しメモ</h2>
+      <p class="sub">前日・当日・後日の3点セットを作成。印刷／PDF保存／Markdown・CSV・メモ出力できます。</p>
+      <div class="grid">
+        <div class="field"><label>サービス種別</label>
+          <select id="mKind"><option value="家事代行">家事代行</option><option value="雑用代行">雑用代行</option></select></div>
+        <div class="field"><label>担当者様の呼び方（任意）</label><input type="text" id="mName" placeholder="例：山田さん"></div>
+        <div class="field"><label>作業時間</label><input type="text" id="mTime" placeholder="例：10:00〜12:00"></div>
+        <div class="field"><label>連絡先・連絡方法</label><input type="text" id="mContact" placeholder="例：090-xxxx（LINE可）"></div>
+        <div class="field"><label>入室方法・鍵</label><input type="text" id="mKey" placeholder="例：玄関キーボックス #1234"></div>
+        <div class="field"><label>アクセス・駐車メモ</label><input type="text" id="mAccess" placeholder="例：建物裏に駐車可"></div>
+      </div>
+
+      <span class="label">当日の優先順位（上から優先）</span>
+      <div class="grid">
+        <div class="field"><label>優先1</label><input type="text" id="mP1" placeholder="例：キッチンの油汚れ"></div>
+        <div class="field"><label>優先2</label><input type="text" id="mP2" placeholder="例：浴室のカビ取り"></div>
+        <div class="field"><label>優先3</label><input type="text" id="mP3" placeholder="例：床の拭き掃除"></div>
+        <div class="field"><label>道具・洗剤の場所</label><input type="text" id="mTools" placeholder="例：洗面台下の収納"></div>
+      </div>
+
+      <span class="label">そのほかお願いしたいこと（1行に1つ）</span>
+      <textarea id="mDo" placeholder="例：&#10;玄関のたたきを水拭き&#10;ゴミを分別して指定の袋へ"></textarea>
+
+      <span class="label">触らないで・立入NG・配慮</span>
+      <textarea id="mNo" placeholder="例：&#10;書斎には入らないでください&#10;猫が玄関から出ないよう扉の開閉にご注意ください"></textarea>
+
+      <span class="label">事前共有（任意）</span>
+      <div class="chips" id="mNoteChips">
+        <label class="chip"><input type="checkbox" value="ペットがいます（犬／猫など）"><span>🐾 ペットあり</span></label>
+        <label class="chip"><input type="checkbox" value="小さな子どもがいます"><span>👶 子どもあり</span></label>
+        <label class="chip"><input type="checkbox" value="作業中は在宅しています"><span>🏠 在宅</span></label>
+        <label class="chip"><input type="checkbox" value="不在のため鍵のお預け対応です"><span>🔑 不在</span></label>
+      </div>
+
+      <span class="label">スタッフさんの思考タイプ</span>
+      <div class="chips" id="mThink">
+        <label class="chip"><input type="radio" name="mthink" value="bun"><span>📖 文系より（背景・理由が響く）</span></label>
+        <label class="chip"><input type="radio" name="mthink" value="ri"><span>🔬 理系より（手順・基準が響く）</span></label>
+        <label class="chip"><input type="radio" name="mthink" value="any" checked><span>🙂 どちらでも</span></label>
+      </div>
+      <span class="label">スタンス・マインド</span>
+      <div class="chips" id="mStance">
+        <label class="chip"><input type="radio" name="mstance" value="serious"><span>✅ きっちり真面目（抜け漏れなく）</span></label>
+        <label class="chip"><input type="radio" name="mstance" value="easy"><span>🍵 さっぱり適当（要点だけ）</span></label>
+        <label class="chip"><input type="radio" name="mstance" value="std" checked><span>⚖️ 標準</span></label>
+      </div>
+
+      <span class="label">ざっくりメモ（雑でOK・あとで整えます）</span>
+      <textarea id="mRough" placeholder="例：とりあえずキッチンと風呂。猫いるので玄関注意。鍵はポスト下。時間あれば床も拭いて。"></textarea>
+
+      <div class="ai-row" style="margin-top:14px;">
+        <div>
+          <div class="lab">🤖 AIで整える（雑メモ → 渡せるメモ）</div>
+          <div class="hint">ONで、ざっくりメモをスタッフのタイプに合わせて自動整理。OFFは手動テンプレ（タイプで体裁だけ変化）</div>
+        </div>
+        <label class="switch"><input type="checkbox" id="mAiToggle"><span class="track"></span><span class="knob"></span></label>
+      </div>
+
+      <span class="label">オプション</span>
+      <div class="chips">
+        <label class="chip"><input type="checkbox" id="mEn"><span>🌐 英語併記（JP/EN）</span></label>
+        <label class="chip"><input type="checkbox" id="mFill"><span>✍️ 当日メモに記入欄（チェック＋所要時間）</span></label>
+      </div>
+
+      <button class="gen" style="margin-top:18px;" onclick="makeMemo()">✨ メモ一式をつくる</button>
+
+      <div id="memoResult" class="hidden">
+        <div class="fnamerow">
+          <label style="display:block;font-size:12px;color:var(--ink-soft);font-weight:700;margin-bottom:4px;">保存ファイル名（任意・空欄なら自動）</label>
+          <input type="text" id="mFname" placeholder="空欄＝日付＋名前＋種類＋テーマで自動命名" oninput="updateMemoFnamePreview()">
+          <p class="fprev" id="mFnamePreview"></p>
+        </div>
+        <div class="btn-row">
+          <button id="mMdBtn" onclick="copyMemoMD()">📝 Markdownコピー</button>
+          <button onclick="downloadMemoAs('md')">⬇️ Markdown（.md）</button>
+          <button onclick="downloadMemoAs('pdf')">⬇️ PDFをダウンロード</button>
+          <button onclick="printMemo()">🖨 PDFを印刷</button>
+          <button onclick="downloadMemoAs('csv')">⬇️ CSV（.csv）</button>
+          <button onclick="downloadMemoAs('txt')">⬇️ メモ（.txt）</button>
+        </div>
+        <div class="memo-blk"><h3>📨 前日メモ（事前にお送りする）</h3><pre class="out" id="memoOut1"></pre></div>
+        <div class="memo-blk"><h3>📋 当日メモ（玄関に貼る／手渡し）</h3><pre class="out" id="memoOut2"></pre></div>
+        <div class="memo-blk"><h3>💌 後日メモ（お礼・FB）</h3><pre class="out" id="memoOut3"></pre></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 作業ログ ============ -->
+  <div id="logView" class="view">
+    <div class="card">
+      <h2><span class="num">📊</span>作業ログ（振り返り）</h2>
+      <p class="sub">当日の所要時間を記録して、合計と内訳を集計。後日の振り返りに。</p>
+      <div class="grid">
+        <div class="field"><label>サービス種別</label><select id="lKind"><option>家事代行</option><option>雑用代行</option></select></div>
+        <div class="field"><label>日付</label><input type="date" id="lDate"></div>
+      </div>
+      <div class="btn-row" style="margin-top:6px;">
+        <button onclick="loadLogFromMemo()">📥 お渡しメモのタスクを読込</button>
+        <button onclick="addLogRow()">＋ 行を追加</button>
+      </div>
+      <span class="label">タスクと時間（予定・実績、0.25h＝15分単位）</span>
+      <div class="loghead"><span class="c1">タスク</span><span class="c2">予定h</span><span class="c3">実績h</span><span class="c4"></span></div>
+      <div id="logRows"></div>
+      <div class="log-total" id="logTotal">実績 0h ／ 予定 0h ／ 差 +0h・0件</div>
+      <div id="logBars" style="margin-top:10px;"></div>
+      <span class="label">気づき・次回の調整</span>
+      <textarea id="lNote" placeholder="例：浴室に想定より時間がかかった。次回は浴室を最初にお願いする。"></textarea>
+      <button class="gen" style="margin-top:18px;" onclick="makeLog()">✨ ログをまとめる</button>
+      <div id="logResult" class="hidden">
+        <div class="btn-row">
+          <button onclick="printLog()">🖨 印刷／PDF保存</button>
+          <button id="lMdBtn" onclick="copyLogMD()">📝 Markdownコピー</button>
+          <button onclick="downloadLogMD()">⬇️ .mdダウンロード</button>
+        </div>
+        <pre class="out" id="logOut" style="margin-top:12px;"></pre>
+        <button class="copy" id="addHistBtn" style="margin-top:10px;" onclick="addToHistory()">➕ この回を記録に追加（月次集計へ）</button>
+      </div>
+    </div>
+
+    <div class="card" id="historyCard">
+      <h2><span class="num">📅</span>月次サマリー（推移）</h2>
+      <p class="sub">記録した回を月ごとに集計します。データはこのブラウザ／端末にのみ保存されます（共有・長期保存はCSV／Markdown書き出しが確実）。</p>
+      <div class="log-total" id="historyTotal">まだ記録がありません</div>
+      <div class="btn-row" style="margin-top:6px;">
+        <button onclick="document.getElementById('csvFile').click()">📥 CSVから履歴を復元</button>
+        <input type="file" id="csvFile" accept=".csv,text/csv" style="display:none" onchange="importHistoryCSV(this.files[0]); this.value='';">
+      </div>
+      <div class="field" style="margin-top:10px;max-width:300px;">
+        <label>月の目標時間（h・任意 → グラフに目標線）</label>
+        <input type="number" id="histGoal" min="0" step="0.25" placeholder="例：4" oninput="saveGoal();renderHistory();">
+      </div>
+      <div id="historyBars" style="margin-top:10px;"></div>
+      <div id="historyTable" style="margin-top:12px;"></div>
+      <div class="btn-row" id="historyBtns" style="display:none;">
+        <button id="hMdBtn" onclick="copyHistoryMD()">📝 月次Markdown</button>
+        <button id="hCsvBtn" onclick="downloadHistoryCSV()">📄 CSV書き出し</button>
+        <button onclick="clearHistory()">🗑 履歴クリア</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>うさうさ先生 🐰 ／ ウソつかず・盛らずの依頼文づくり<br>
+    <span class="ver">バハイ・ウサギ（Bahay Usagi） v1.2.0 ｜ bahay-usagi.html ｜ テスト済み（単体/結合/総合/ブラックボックス/モンキー 計97項目 全PASS）2026-05-30</span>
+  </footer>
+</div>
+
+<div class="print-area" id="printArea"></div>
+
+<script>
+/* ===== tab ===== */
+function showView(v){
+  ['gen','man','memo','log'].forEach(k=>{
+    document.getElementById(k+'View').classList.toggle('on', v===k);
+    document.getElementById('tab-'+k).classList.toggle('on', v===k);
+  });
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ===== generator ===== */
+const TASKS={
+  house:["水回りの掃除（キッチン・お風呂・トイレ・洗面）","部屋の掃除機がけ・床拭き","窓・サッシの清掃",
+    "洗濯（洗う・干す・たたむ）","アイロンがけ","作り置きの料理","食器洗い・キッチン片付け",
+    "整理整頓・収納","ゴミの分別・搬出","ベッドメイキング・シーツ交換"],
+  errand:["買い物の代行（食品・日用品）","荷物の発送・受け取り","クリーニングの出し入れ",
+    "役所・銀行などの手続き同行","宅配便の立ち会い","粗大ゴミの手配・搬出","家具の組み立て",
+    "ちょっとした模様替え・力仕事","ペットの散歩・お世話","電球交換・簡単なメンテナンス"]
+};
+const TONE_LABEL={polite:'ていねい',casual:'カジュアル',bullet:'箇条書き'};
+const STAFF_TXT={
+  same:{polite:'可能でしたら、前回ご担当いただいた方に引き続きお願いできますと安心です。',casual:'できれば前回と同じ方にお願いできると嬉しいです！'},
+  diff:{polite:'今回は別のスタッフの方にご対応いただけますと幸いです。',casual:'今回は別の方にお願いできればと思っています。'},
+  any:{polite:'ご担当はご都合のつく方で構いません。',casual:'担当の方はどなたでも大丈夫です！'}
+};
+let currentTone='polite',lastData=null;
+
+function switchMode(){const m=document.querySelector('input[name=mode]:checked').value;
+  document.getElementById('newMode').classList.toggle('hidden',m!=='new');
+  document.getElementById('followMode').classList.toggle('hidden',m!=='follow');}
+function switchKind(){const kind=document.querySelector('input[name=kind]:checked').value;
+  const box=document.getElementById('taskChips');box.innerHTML='';
+  TASKS[kind].forEach(t=>{const l=document.createElement('label');l.className='chip';
+    l.innerHTML=`<input type="checkbox" value="${t}"><span>${t}</span>`;box.appendChild(l);});}
+function switchSub(){const s=document.querySelector('input[name=sub]:checked').value;
+  ['repeat','reschedule','decline'].forEach(k=>document.getElementById('g-'+k).classList.toggle('hidden',k!==s));}
+function toggleRchange(){const v=document.querySelector('input[name=rcontent]:checked').value;
+  document.getElementById('rChange').classList.toggle('hidden',v!=='change');}
+
+function collect(){
+  const mode=document.querySelector('input[name=mode]:checked').value;
+  if(mode==='new'){
+    const kind=document.querySelector('input[name=kind]:checked').value;
+    const date=document.getElementById('date').value;let dateStr='';
+    if(date){const d=new Date(date+'T00:00');const w=['日','月','火','水','木','金','土'][d.getDay()];
+      dateStr=`${d.getMonth()+1}月${d.getDate()}日（${w}）`;}
+    return {mode,kindLabel:kind==='house'?'家事代行':'雑用代行',
+      tasks:[...document.querySelectorAll('#taskChips input:checked')].map(c=>c.value),
+      persona:document.querySelector('input[name=persona]:checked').value,
+      personaNote:document.getElementById('personaNote').value.trim(),
+      area:document.getElementById('area').value.trim(),dateStr,
+      time:document.getElementById('time').value.trim(),hours:document.getElementById('hours').value,
+      freq:document.getElementById('freq').value,budget:document.getElementById('budget').value.trim(),
+      notes:[...document.querySelectorAll('#noteChips input:checked')].map(c=>c.value),
+      free:document.getElementById('note').value.trim()};
+  }
+  return {mode,sub:document.querySelector('input[name=sub]:checked').value,
+    kindLabel:document.getElementById('fKind').value,
+    staff:document.querySelector('input[name=staff]:checked').value,
+    rcontent:document.querySelector('input[name=rcontent]:checked').value,
+    rChange:document.getElementById('rChange').value.trim(),rDate:document.getElementById('rDate').value.trim(),
+    rFb:document.getElementById('rFb').value.trim(),sOld:document.getElementById('sOld').value.trim(),
+    sNew:document.getElementById('sNew').value.trim(),sReason:document.getElementById('sReason').value.trim(),
+    dTarget:document.getElementById('dTarget').value.trim(),dReason:document.getElementById('dReason').value.trim(),
+    dFuture:document.querySelector('input[name=dFuture]:checked').value,dLate:document.getElementById('dLate').checked};
+}
+async function generate(){lastData=collect();const c=document.getElementById('outCard');
+  c.classList.add('show');c.scrollIntoView({behavior:'smooth',block:'start'});await render();}
+
+function buildRule(d,tone){return d.mode==='new'?ruleNew(d,tone):ruleFollow(d,tone);}
+function ruleNew(d,tone){let txt='';
+  if(tone==='bullet'){txt+=`【依頼種別】${d.kindLabel}\n`;
+    if(d.tasks.length)txt+=`【内容】\n${d.tasks.map(t=>'・'+t).join('\n')}\n`;
+    if(d.area)txt+=`【エリア】${d.area}\n`;
+    if(d.dateStr||d.time)txt+=`【希望日時】${[d.dateStr,d.time].filter(Boolean).join(' ')}\n`;
+    if(d.hours)txt+=`【所要時間】${d.hours}\n`;txt+=`【頻度】${d.freq}\n`;
+    if(d.budget)txt+=`【予算】${d.budget}\n`;
+    if(d.notes.length)txt+=`【事前共有】\n${d.notes.map(n=>'・'+n).join('\n')}\n`;
+    if(d.free)txt+=`【その他】${d.free}\n`;
+    return txt+`\nご対応可能でしたら、お見積りをいただけますと幸いです。`;}
+  const p=tone==='polite';
+  txt+=p?`お世話になります。${d.kindLabel}をお願いしたく、ご連絡いたしました。\n\n`:`こんにちは！${d.kindLabel}をお願いしたいです。\n\n`;
+  if(d.tasks.length){txt+=p?'【お願いしたい内容】\n':'◆お願いしたいこと\n';txt+=d.tasks.map(t=>'・'+t).join('\n')+'\n\n';}
+  const cond=[];if(d.area)cond.push(`エリア：${d.area}`);
+  if(d.dateStr||d.time)cond.push(`希望日時：${[d.dateStr,d.time].filter(Boolean).join(' ')}`);
+  if(d.hours)cond.push(`所要時間：${d.hours}`);cond.push(`頻度：${d.freq}`);if(d.budget)cond.push(`ご予算：${d.budget}`);
+  txt+=(p?'【条件】\n':'◆条件\n')+cond.map(c=>'・'+c).join('\n')+'\n\n';
+  if(d.notes.length){txt+=p?'【事前にお伝えしたいこと】\n':'◆お伝えしておきたいこと\n';txt+=d.notes.map(n=>'・'+n).join('\n')+'\n\n';}
+  if(d.free){txt+=p?'【その他のご要望】\n':'◆その他\n';txt+=d.free+'\n\n';}
+  txt+=p?'ご対応の可否とお見積りをご確認のうえ、ご返信いただけますと幸いです。\nどうぞよろしくお願いいたします。'
+        :'対応できそうか＆おおよその金額を教えてもらえると嬉しいです！よろしくお願いします🙇';
+  return txt;}
+function ruleFollow(d,tone){const p=tone!=='casual';
+  if(d.sub==='repeat'){
+    let t=p?`お世話になっております。先日は${d.kindLabel}をご対応いただき、ありがとうございました。\n\n`:`こんにちは！先日は${d.kindLabel}ありがとうございました😊\n\n`;
+    if(d.rFb)t+=(p?d.rFb+'。\n':d.rFb+'！\n');
+    t+=p?`つきましては、改めて${d.kindLabel}をお願いしたくご連絡いたしました。\n\n`:`また${d.kindLabel}をお願いしたくて連絡しました！\n\n`;
+    t+=STAFF_TXT[d.staff][p?'polite':'casual']+'\n';
+    t+='内容は'+(d.rcontent==='same'?'前回と同じで問題ありません。':'前回から少し変更があります。')+'\n';
+    if(d.rcontent==='change'&&d.rChange)t+=d.rChange+'\n';
+    if(d.rDate)t+=(p?'希望日時：'+d.rDate+'\n':'希望は'+d.rDate+'です！\n');
+    t+=p?'\nご都合をご確認のうえ、ご返信いただけますと幸いです。どうぞよろしくお願いいたします。':'\n空き状況を教えてもらえると嬉しいです！よろしくお願いします🙇';
+    return t;}
+  if(d.sub==='reschedule'){
+    let t=p?`お世話になっております。${d.kindLabel}の日程について、ご相談がございます。\n\n`:`こんにちは！${d.kindLabel}の日程の件でご相談です。\n\n`;
+    if(d.sOld)t+=(p?`現在「${d.sOld}」で予約をいただいておりますが、\n`:`いま「${d.sOld}」で予約しているのですが、\n`);
+    if(d.sReason)t+=d.sReason+'、';
+    t+=p?'誠に勝手ながら日程を変更させていただけますでしょうか。\n':'日程を変更できればと思っています。\n';
+    if(d.sNew)t+=(p?`希望：${d.sNew}\n`:`希望は「${d.sNew}」です！\n`);
+    t+=p?'\nご迷惑をおかけし申し訳ございませんが、ご調整いただけますと幸いです。よろしくお願いいたします。':'\n急ですみません💦 ご調整よろしくお願いします🙇';
+    return t;}
+  let t=p?`お世話になっております。${d.dTarget?d.dTarget+'の':''}${d.kindLabel}につきまして、\n`:`こんにちは。${d.dTarget?d.dTarget+'の':''}${d.kindLabel}の件です。\n`;
+  if(d.dReason)t+=d.dReason+'、';
+  t+=p?'誠に恐縮ですが今回はキャンセル（お見送り）させていただきたく、ご連絡いたしました。\n':'すみませんが今回はキャンセルさせてください。\n';
+  if(d.dLate)t+=p?'直前のご連絡となり、大変申し訳ございません。\n':'直前の連絡になってしまい本当にごめんなさい💦\n';
+  if(d.dFuture==='again')t+=p?'\nまた機会がありましたら、ぜひお願いできればと思っております。':'\nまたぜひお願いしたいです！';
+  t+=p?'\nご迷惑をおかけし申し訳ございません。よろしくお願いいたします。':'\nよろしくお願いします🙇';
+  return t;}
+
+async function buildAI(d,tone){
+  const toneGuide={polite:'ていねいな敬語。安心感のある相談調。',casual:'親しみやすい口語。フランクだが失礼にならない範囲。',
+    bullet:'要点を【見出し】＋箇条書きで簡潔に。挨拶は最小限。'}[tone];
+  let scenario='',facts={};
+  if(d.mode==='new'){scenario=`新規の依頼文。依頼者ペルソナ：${d.persona}${d.personaNote?'／補足：'+d.personaNote:''}`;
+    facts={依頼種別:d.kindLabel,内容:d.tasks,エリア:d.area||null,希望日:d.dateStr||null,希望時間帯:d.time||null,
+      所要時間:d.hours||null,頻度:d.freq,予算:d.budget||null,事前共有:d.notes,その他要望:d.free||null};
+  }else if(d.sub==='repeat'){const sMap={same:'前回と同じ担当者を希望',diff:'別の担当者に変更を希望',any:'担当者はどちらでもよい'};
+    scenario='以前利用したサービスへの再依頼。お礼→再依頼の流れで。';
+    facts={種別:d.kindLabel,担当希望:sMap[d.staff],内容:d.rcontent==='same'?'前回と同じ':('変更あり：'+(d.rChange||'詳細未記入')),
+      次回希望日時:d.rDate||null,前回の感想:d.rFb||null};
+  }else if(d.sub==='reschedule'){scenario='予約済みの日程変更のお願い。申し訳なさを示しつつ簡潔に。';
+    facts={種別:d.kindLabel,もとの予定:d.sOld||null,変更希望:d.sNew||null,理由:d.sReason||null};
+  }else{scenario='予約のキャンセル・お断りの連絡。丁寧にお詫びを。';
+    facts={種別:d.kindLabel,対象:d.dTarget||null,理由:d.dReason||null,今後:d.dFuture==='again'?'また利用したい':'今回限り',直前連絡:d.dLate};}
+  const prompt=`あなたは家事代行・雑用代行サービスへ送るメッセージを作成するアシスタントです。
+以下のシナリオと条件をもとに、自然で誇張のない日本語のメッセージを1通作成してください。
+
+# シナリオ
+${scenario}
+
+# トーン
+${toneGuide}
+
+# 条件（JSON / nullや空は触れない）
+${JSON.stringify(facts,null,2)}
+
+# ルール
+- 事実にない情報を足さない。空欄の項目には言及しない。
+- メッセージ本文のみを出力。前置き・解説・コードブロックは禁止。`;
+  const res=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:1000,messages:[{role:"user",content:prompt}]})});
+  if(!res.ok)throw new Error("api "+res.status);
+  const data=await res.json();
+  const text=data.content.filter(i=>i.type==="text").map(i=>i.text).join("\n").replace(/```[a-z]*|```/g,"").trim();
+  if(!text)throw new Error("empty");return text;}
+
+async function render(){if(!lastData)return;
+  const out=document.getElementById('out'),badge=document.getElementById('badge'),
+        btn=document.getElementById('genBtn'),useAI=document.getElementById('aiToggle').checked;
+  if(useAI){btn.disabled=true;out.textContent='🐰 AIが文章を整えています…';
+    badge.className='badge ai';badge.textContent=`🤖 AI生成（${TONE_LABEL[currentTone]}）`;
+    try{out.textContent=await buildAI(lastData,currentTone);}
+    catch(e){out.textContent=buildRule(lastData,currentTone);badge.className='badge rule';
+      badge.textContent=`📝 ルール生成（AI接続できずフォールバック・${TONE_LABEL[currentTone]}）`;}
+    finally{btn.disabled=false;}
+  }else{out.textContent=buildRule(lastData,currentTone);badge.className='badge rule';
+    badge.textContent=`📝 ルール生成（${TONE_LABEL[currentTone]}）`;}}
+function setTone(t){currentTone=t;
+  document.querySelectorAll('.tone button').forEach(b=>b.classList.toggle('on',b.dataset.tone===t));render();}
+function copyOut(){navigator.clipboard.writeText(document.getElementById('out').textContent).then(()=>{
+  const b=document.getElementById('copyBtn');b.textContent='✅ コピーしました！';b.classList.add('done');
+  setTimeout(()=>{b.textContent='📋 コピーする';b.classList.remove('done');},1800);});}
+
+/* ===== manual ===== */
+const boxes=[...document.querySelectorAll('.todo input')];
+function updateProg(){const done=boxes.filter(b=>b.checked).length;
+  const pct=boxes.length?Math.round(done/boxes.length*100):0;
+  document.getElementById('prog').style.width=pct+'%';
+  document.getElementById('progTxt').textContent=`${done} / ${boxes.length} 完了（${pct}%）`;}
+boxes.forEach(b=>b.addEventListener('change',updateProg));
+function makeFB(){
+  const sat=document.querySelector('input[name=sat]:checked').value;
+  const good=[...document.querySelectorAll('#goodChips input:checked')].map(c=>c.value);
+  const next=[...document.querySelectorAll('#nextChips input:checked')].map(c=>c.value);
+  const free=document.getElementById('fbFree').value.trim();
+  let t='お世話になっております。先日はありがとうございました。\n\n';
+  t+=`満足度：${sat}\n`;
+  if(good.length)t+='よかった点：\n'+good.map(g=>'・'+g).join('\n')+'\n';
+  if(next.length)t+='次回への要望：\n'+next.map(n=>'・'+n).join('\n')+'\n';
+  if(free)t+='\n'+free+'\n';
+  t+='\n引き続きよろしくお願いいたします。';
+  const out=document.getElementById('fbOut');out.textContent=t;out.style.display='block';
+  document.getElementById('fbCopy').style.display='block';}
+function copyFB(){navigator.clipboard.writeText(document.getElementById('fbOut').textContent).then(()=>{
+  const b=document.getElementById('fbCopy');b.textContent='✅ コピーしました！';b.classList.add('done');
+  setTimeout(()=>{b.textContent='📋 コピーする';b.classList.remove('done');},1800);});}
+
+/* ===== handover memo ===== */
+let memoMD='', lastMemo=null;
+function mv(id){return document.getElementById(id).value.trim();}
+function lines(id){return mv(id).split('\n').map(s=>s.trim()).filter(Boolean);}
+function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+function memoData(){
+  const tasks=['mP1','mP2','mP3'].map(mv).filter(Boolean).concat(lines('mDo'));
+  return {
+    kind:document.getElementById('mKind').value,
+    name:mv('mName')||'ご担当者様',
+    time:mv('mTime'), key:mv('mKey'), access:mv('mAccess'), contact:mv('mContact'), tools:mv('mTools'),
+    tasks, no:lines('mNo'),
+    notes:[...document.querySelectorAll('#mNoteChips input:checked')].map(c=>c.value),
+    think:document.querySelector('input[name=mthink]:checked').value,
+    stance:document.querySelector('input[name=mstance]:checked').value,
+    rough:mv('mRough'),
+    en:document.getElementById('mEn').checked,
+    fill:document.getElementById('mFill').checked
+  };
+}
+
+/* タイプに合わせたルールベース生成（手動モード） */
+function ruleMemo(d){
+  const ri=d.think==='ri', bun=d.think==='bun';
+  const serious=d.stance==='serious', easy=d.stance==='easy';
+  const en=d.en;
+  const lab=(jp,eng)=> en?`${jp} / ${eng}`:jp;       // 見出し・ラベル（同一行）
+  const sen=(jp,eng)=> en?`${jp}\n${eng}`:jp;        // 文（改行で英訳）
+  const num=(arr)=>arr.map((x,i)=>`  ${i+1}. ${x}`).join('\n');
+
+  // --- 前日 ---
+  let t1=`【${lab('前日のご連絡','Day-before note')}｜${d.kind}】\n`;
+  t1+=( easy ? sen(`${d.name}、明日よろしくお願いします！要点だけ送ります。`,`Hi ${d.name}, see you tomorrow! Just the key points below.`)
+      : bun ? sen(`${d.name}、お世話になります。明日はどうぞよろしくお願いいたします。当日の流れを簡単にご案内します。`,`Hello ${d.name}, thank you. Here's a quick overview for tomorrow.`)
+      :       sen(`${d.name}、お世話になります。明日の段取りをお送りします。`,`Hello ${d.name}, here is the plan for tomorrow.`) )+`\n\n`;
+  if(d.time) t1+=`■ ${lab('作業時間','Work hours')}：${d.time}\n`;
+  if(d.key) t1+=`■ ${lab('入室方法','Entry')}：${d.key}\n`;
+  if(d.access) t1+=`■ ${lab('アクセス・駐車','Access & parking')}：${d.access}\n`;
+  if(d.tasks.length){t1+=`■ ${lab('当日の優先順位'+(ri?'（上から順に）':''),'Priorities (top first)')}：\n`+num(d.tasks)+'\n';}
+  if(d.tools) t1+=`■ ${lab('道具・洗剤','Supplies & detergent')}：${d.tools}\n`;
+  if(!easy && d.notes.length) t1+=`■ ${lab('共有事項','Notes')}：${d.notes.join('／')}\n`;
+  if(d.contact) t1+=`■ ${lab('ご連絡先','Contact')}：${d.contact}\n`;
+  if(d.rough && !easy) t1+=`■ ${lab('補足','Extra')}：${d.rough}\n`;
+  t1+= serious ? sen('ご不明点があれば前日のうちにご連絡ください。よろしくお願いいたします。','Please reach out today if anything is unclear. Thank you.')
+      : easy ? sen('よろしくお願いします！','Thank you!')
+      : sen('当日はよろしくお願いいたします。','See you tomorrow — thank you.');
+
+  // --- 当日 ---
+  let t2=`【${lab('本日のお願いメモ','Today\'s task note')}｜${d.kind}】\n`;
+  t2+=( easy ? sen(`${d.name}、本日よろしくお願いします！`,`Hi ${d.name}, thanks for today!`)
+      : sen(`${d.name}、本日はよろしくお願いいたします。`,`Hello ${d.name}, thank you for today.`) )+`\n`;
+  if(d.time) t2+=`${lab('作業時間','Work hours')}：${d.time}\n`;
+  if(bun && !easy) t2+=sen('お忙しいところ恐れ入ります。下記、上から優先でお願いできれば助かります。','Please work from the top down by priority. Thank you.')+`\n`;
+  t2+=`\n▼ ${lab('お願いしたいこと（上から優先）','Tasks (top = highest priority)')}\n`;
+  t2+=(d.tasks.length?d.tasks.map(x=>`☐ ${x}`).join('\n'):`☐ ${lab('（別途お伝えします）','(to be confirmed)')}`)+'\n';
+  if(d.tools) t2+=`\n▼ ${lab('場所メモ','Where things are')}\n・${lab('道具／洗剤','Supplies/detergent')}：${d.tools}\n`;
+  if(d.no.length) t2+=`\n▼ ${lab('触らない・NG・配慮','Do not touch / please note')}\n`+d.no.map(x=>`・${x}`).join('\n')+'\n';
+  if(!easy && d.notes.length) t2+=`\n▼ ${lab('共有事項','Notes')}\n`+d.notes.map(x=>`・${x}`).join('\n')+'\n';
+  if(d.rough && !easy) t2+=`\n▼ ${lab('補足メモ','Extra note')}\n・${d.rough}\n`;
+  if(d.contact) t2+=`\n▼ ${lab('ご連絡先','Contact')}：${d.contact}\n`;
+  t2+= serious ? sen('\n終わった項目はチェックをお願いします。お気づきの点があればご連絡ください。','\nPlease check off finished items. Let me know if anything comes up.')
+      : easy ? sen('\n何かあれば連絡ください！','\nText me if anything comes up!')
+      : sen('\nお気づきの点があればお知らせください。よろしくお願いいたします。','\nPlease let me know if anything comes up. Thank you.');
+
+  // --- 後日 ---
+  let t3=`【${lab('お礼','Thank you')}｜${d.kind}】\n`;
+  t3+=( easy ? sen('本日はありがとうございました！助かりました。','Thanks so much for today!')
+      : sen('本日はありがとうございました。とても助かりました。','Thank you very much for today. It really helped.') )+`\n`;
+  if(!easy) t3+=`${lab('次回への要望があれば、こちらにご記入ください','Requests for next time')}：\n・________________________\n`;
+  t3+= bun ? sen('また機会がありましたら、ぜひお願いできれば嬉しいです。','Hope to work with you again.')
+      : sen('また機会がありましたら、よろしくお願いいたします。','Looking forward to next time. Thank you.');
+
+  return {t1,t2,t3};
+}
+
+/* 書き込み式：当日メモにチェック＆所要時間・開始終了・気づき欄を付与 */
+function applyFillForm(t2,en){
+  const lab=(jp,eng)=> en?`${jp} / ${eng}`:jp;
+  let ls=t2.split('\n');
+  ls=ls.map(l=> /^☐/.test(l.trim()) ? `${l}　（${lab('所要','Time')} ____ ${lab('分','min')}）` : l);
+  const se=`⏱ ${lab('開始','Start')} __:__ ／ ${lab('終了','End')} __:__`;
+  if(ls.length && /^【.*】/.test(ls[0])) ls.splice(1,0,se); else ls.unshift(se);
+  ls.push('');
+  ls.push(`▼ ${lab('気づき・申し送り','Notes / handover')}`);
+  ls.push('・________________________________');
+  ls.push('・________________________________');
+  return ls.join('\n');
+}
+
+/* AIモード：雑メモ＋タイプから3点を整える */
+async function aiMemo(d){
+  const thinkTxt={bun:'文系より（背景・理由・流れがあると動きやすい）',ri:'理系より（番号付き手順・基準・数値が明確だと動きやすい）',any:'特になし'}[d.think];
+  const stanceTxt={serious:'きっちり真面目（抜け漏れなく具体的に。確認ポイントも）',easy:'さっぱり適当（要点だけ短く。細かい注記は省く）',std:'標準'}[d.stance];
+  const facts={種別:d.kind,スタッフ:d.name,作業時間:d.time||null,入室方法:d.key||null,
+    アクセス:d.access||null,連絡先:d.contact||null,道具洗剤の場所:d.tools||null,
+    優先タスク:d.tasks,触らないNG配慮:d.no,共有事項:d.notes,依頼者の雑メモ:d.rough||null};
+  const prompt=`あなたは、依頼者の「雑なメモ」を家事代行スタッフ（${d.name}）にそのまま渡せる「前日／当日／後日」メモに整えるアシスタントです。
+時短で・わかりやすく・スタッフが仕事しやすい表現にしてください。
+
+# スタッフのタイプ（この受け取り方に最適化）
+- 思考：${thinkTxt}
+- スタンス：${stanceTxt}
+
+# 整え方
+- 当日メモのタスクは、各行の先頭に「☐ 」を付ける（チェックできるように）。
+- 雑メモは整理して反映するが、事実にない情報は足さない。空欄の項目には触れない。
+- 理系タイプなら番号・基準を明確に、文系タイプなら一言の背景や流れを添える。適当スタンスなら短く、真面目スタンスなら確認ポイントも。
+${d.en?'- 各メモは「日本語の行」のすぐ下に「英訳の行」を続けるバイリンガル表記にする（☐は英語側にも付けず、日本語タスク行のみに付ける）。':''}
+
+# 入力（JSON）
+${JSON.stringify(facts,null,2)}
+
+# 出力形式（厳守）
+次のJSONのみを出力。前置き・解説・コードブロックは禁止。
+{"maejitsu":"前日メモ本文","toujitsu":"当日メモ本文","gojitsu":"後日メモ本文"}`;
+  const res=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:1200,messages:[{role:"user",content:prompt}]})});
+  if(!res.ok)throw new Error("api "+res.status);
+  const data=await res.json();
+  let text=data.content.filter(i=>i.type==="text").map(i=>i.text).join("\n").trim();
+  text=text.replace(/```json|```/g,'').trim();
+  const o=JSON.parse(text);
+  if(!o.maejitsu||!o.toujitsu||!o.gojitsu)throw new Error("shape");
+  return {t1:o.maejitsu.trim(),t2:o.toujitsu.trim(),t3:o.gojitsu.trim()};
+}
+
+async function makeMemo(){
+  const d=memoData();
+  const useAI=document.getElementById('mAiToggle').checked;
+  const o1=document.getElementById('memoOut1'),o2=document.getElementById('memoOut2'),o3=document.getElementById('memoOut3');
+  document.getElementById('memoResult').classList.remove('hidden');
+  document.getElementById('memoResult').scrollIntoView({behavior:'smooth',block:'start'});
+
+  let r;
+  if(useAI){
+    o1.textContent='🐰 AIが整えています…'; o2.textContent=''; o3.textContent='';
+    try{ r=await aiMemo(d); }
+    catch(e){ r=ruleMemo(d); o1.textContent=''; }
+  }else{
+    r=ruleMemo(d);
+  }
+  if(d.fill) r.t2=applyFillForm(r.t2, d.en);
+  o1.textContent=r.t1; o2.textContent=r.t2; o3.textContent=r.t3;
+  buildMemoMD(d,r); buildMemoPrint(d,r); lastMemo={d,r};
+  updateMemoFnamePreview();
+}
+
+/* テキスト → 行レンダリング（☐ をチェックボックスに） */
+function memoLinesToHTML(text){
+  let html='';
+  text.split('\n').forEach((raw,i)=>{
+    const s=raw.replace(/\s+$/,'');
+    if(i===0 && /^【.*】/.test(s)) return;          // 重複する見出し行は省略
+    if(!s){ html+='<div class="row">&nbsp;</div>'; return; }
+    const m=s.match(/^[ 　]*☐[ 　]?(.*)$/);
+    if(m){ html+=`<div class="chk"><span class="b"></span><span>${esc(m[1])}</span></div>`; }
+    else { html+=`<div class="row">${esc(s)}</div>`; }
+  });
+  return html;
+}
+function memoLinesToMD(text){
+  return text.split('\n').map((raw,i)=>{
+    const s=raw.replace(/\s+$/,'');
+    if(i===0 && /^【.*】/.test(s)) return null;
+    const m=s.match(/^[ 　]*☐[ 　]?(.*)$/);
+    if(m) return `- [ ] ${m[1]}`;
+    if(/^[ 　]*[・▼■]/.test(s)) return s.replace(/^[ 　]*[・]/,'- ').replace(/^[ 　]*[▼■]\s?/,'### ');
+    return s;
+  }).filter(x=>x!==null).join('\n');
+}
+
+function buildMemoMD(d,r){
+  let m=`# ${d.kind} お渡しメモ一式（${d.name}）\n\n`;
+  m+=`## 📨 前日メモ（事前にお送りする）\n\n${memoLinesToMD(r.t1)}\n\n`;
+  m+=`## 📋 当日メモ（玄関に貼る／手渡し）\n\n${memoLinesToMD(r.t2)}\n\n`;
+  m+=`## 💌 後日メモ（お礼・FB）\n\n${memoLinesToMD(r.t3)}\n`;
+  memoMD=m;
+}
+
+function buildMemoPrint(d,r){
+  let p=`<div class="ptitle">🐰 ${esc(d.kind)} お渡しメモ一式</div>`;
+  p+=`<div class="psub">前日・当日・後日　／　${esc(d.name)} へ</div>`;
+  p+=`<div class="pmemo"><h3>📨 前日メモ（事前にお送りする）</h3>${memoLinesToHTML(r.t1)}</div>`;
+  p+=`<div class="pmemo"><h3>📋 当日メモ（玄関に貼る／手渡し）</h3>${memoLinesToHTML(r.t2)}</div>`;
+  p+=`<div class="pmemo"><h3>💌 後日メモ（お礼・FB）</h3>${memoLinesToHTML(r.t3)}</div>`;
+  document.getElementById('printArea').innerHTML=p;
+}
+
+function printMemo(){ if(!lastMemo){ alert('先に「メモ一式をつくる」を押してください。'); return; } buildMemoPrint(lastMemo.d,lastMemo.r); window.print(); }
+function copyMemoMD(){
+  if(!memoMD){ alert('先に「メモ一式をつくる」を押してください。'); return; }
+  navigator.clipboard.writeText(memoMD).then(()=>{
+    const b=document.getElementById('mMdBtn');b.textContent='✅ コピーしました！';b.classList.add('done');
+    setTimeout(()=>{b.textContent='📝 Markdownコピー';b.classList.remove('done');},1800);
+  });
+}
+/* ===== 自動ファイル名（YYYYMMDDHHMM_名前_種類_テーマ）＋任意名・複数形式DL ===== */
+function mTs(){ const d=new Date(),p=n=>String(n).padStart(2,'0');
+  return `${d.getFullYear()}${p(d.getMonth()+1)}${p(d.getDate())}${p(d.getHours())}${p(d.getMinutes())}`; }
+function mSani(s){ return (s||'').trim().replace(/[\\/:*?"<>|\u0000-\u001F]/g,'').replace(/\s+/g,'_').slice(0,40); }
+function mAutoName(){
+  const d=lastMemo?lastMemo.d:null;
+  const name=mSani((d&&d.name)|| 'うさうさ');
+  const type=mSani((d&&d.kind)||'お渡しメモ');
+  const theme=mSani((d&&d.tasks&&d.tasks[0]) || 'メモ');
+  return `${mTs()}_${name}_${type}_${theme}`;
+}
+function mBaseName(){ const c=mSani(document.getElementById('mFname').value); return c||mAutoName(); }
+function mFinalName(ext){ ext=ext||'md'; return mBaseName().replace(/\.(md|txt|csv|pdf|html?)$/i,'')+'.'+ext; }
+function updateMemoFnamePreview(){ const el=document.getElementById('mFnamePreview'); if(el) el.textContent='保存名（例）：'+mFinalName('md'); }
+function mSaveBlob(text,name,mime){
+  const blob=new Blob([text],{type:mime}); const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');a.href=url;a.download=name;
+  document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+function memoTxt(){
+  if(!lastMemo) return '';
+  const r=lastMemo.r;
+  return `【前日メモ】\n${r.t1}\n\n【当日メモ】\n${r.t2}\n\n【後日メモ】\n${r.t3}\n`;
+}
+function memoCsv(){
+  const q=s=>'"'+String(s==null?'':s).replace(/"/g,'""')+'"';
+  const d=lastMemo?lastMemo.d:{}, r=lastMemo?lastMemo.r:{};
+  let c='section,content\n';
+  c+=q('種別')+','+q(d.kind||'')+'\n';
+  c+=q('担当')+','+q(d.name||'')+'\n';
+  c+=q('作業時間')+','+q(d.time||'')+'\n';
+  c+=q('前日メモ')+','+q(r.t1||'')+'\n';
+  c+=q('当日メモ')+','+q(r.t2||'')+'\n';
+  c+=q('後日メモ')+','+q(r.t3||'')+'\n';
+  return c;
+}
+function memoPdfHTML(){
+  const d=lastMemo?lastMemo.d:{}, r=lastMemo?lastMemo.r:{};
+  const css=`@page{size:A4;margin:15mm;}body{font-family:"Hiragino Maru Gothic ProN","Yu Gothic",sans-serif;color:#26413F;line-height:1.8;}h1{color:var(--org-deep,#0B7E84);font-size:17pt;margin:0 0 4px;}.s{color:#5E7C79;font-size:10pt;margin:0 0 14px;}.blk{border:1px solid #C9510F;border-radius:8px;padding:11px 14px;margin:0 0 12px;}.blk h3{margin:0 0 6px;color:#C9510F;font-size:12.5pt;border-bottom:2px solid #E5A93B;padding-bottom:4px;}.blk pre{white-space:pre-wrap;font-family:inherit;font-size:11pt;margin:0;}`;
+  const blk=(t,b)=>`<div class="blk"><h3>${esc(t)}</h3><pre>${esc(b||'')}</pre></div>`;
+  return `<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8"><title>${esc(d.kind||'')} お渡しメモ一式</title><style>${css}</style></head><body>`
+    +`<h1>🐰 ${esc(d.kind||'')} お渡しメモ一式</h1><div class="s">前日・当日・後日　／　${esc(d.name||'')} へ</div>`
+    +blk('📨 前日メモ',r.t1)+blk('📋 当日メモ',r.t2)+blk('💌 後日メモ',r.t3)+`</body></html>`;
+}
+function downloadMemoAs(fmt){
+  if(!memoMD||!lastMemo){ alert('先に「メモ一式をつくる」を押してください。'); return; }
+  try{
+    if(fmt==='md'){ mSaveBlob(memoMD, mFinalName('md'), 'text/markdown;charset=utf-8'); }
+    else if(fmt==='txt'){ mSaveBlob(memoTxt(), mFinalName('txt'), 'text/plain;charset=utf-8'); }
+    else if(fmt==='csv'){ mSaveBlob('\uFEFF'+memoCsv(), mFinalName('csv'), 'text/csv;charset=utf-8'); }
+    else if(fmt==='pdf'){ mSaveBlob(memoPdfHTML(), mFinalName('html'), 'text/html;charset=utf-8'); }
+  }catch(e){
+    if(fmt==='csv') navigator.clipboard.writeText(memoCsv()); else navigator.clipboard.writeText(memoMD);
+    alert('ダウンロードがブロックされたため、内容をコピーしました。\n保存名候補：'+mFinalName(fmt==='pdf'?'html':fmt));
+  }
+}
+
+/* ===== work log (予定/実績・0.25h単位) ===== */
+let logMD='', logPrintHTML='', lastLog=null;
+function fmtH(m){const h=Math.floor(m/60),mm=Math.round(m%60);return h?`${h}時間${mm}分`:`${mm}分`;}
+function r025(x){return Math.round((x||0)*4)/4;}
+function nz(h){return String(r025(h));}                       // 2 / 2.5 / 0.75
+function sgn(d){return (d>=0?'+':'-')+nz(Math.abs(d));}       // +0.5 / -0.25
+function addLogRow(name='',plan='',act=''){
+  const box=document.getElementById('logRows');
+  const div=document.createElement('div');div.className='logrow';
+  div.innerHTML=`<input type="text" class="lname" placeholder="タスク名" value="${esc(name).replace(/"/g,'&quot;')}">`
+    +`<input type="number" class="lplan" step="0.25" min="0" placeholder="予定" value="${plan}" oninput="computeLog()">`
+    +`<input type="number" class="lact" step="0.25" min="0" placeholder="実績" value="${act}" oninput="computeLog()">`
+    +`<button class="lrm" title="削除" onclick="this.parentNode.remove();computeLog()">✕</button>`;
+  box.appendChild(div); computeLog();
+}
+function loadLogFromMemo(){
+  if(!lastMemo||!lastMemo.d.tasks.length){alert('先に「お渡しメモ」タブでタスクを作成してください。');return;}
+  document.getElementById('logRows').innerHTML='';
+  lastMemo.d.tasks.forEach(t=>addLogRow(t,'',''));
+  const k=lastMemo.d.kind; const sel=document.getElementById('lKind');
+  [...sel.options].forEach(o=>{if(o.value===k)sel.value=k;});
+}
+function readLog(){
+  return [...document.querySelectorAll('#logRows .logrow')].map(r=>({
+    name:r.querySelector('.lname').value.trim(),
+    plan:r025(Math.max(0,parseFloat(r.querySelector('.lplan').value)||0)),
+    act: r025(Math.max(0,parseFloat(r.querySelector('.lact').value)||0))
+  })).filter(x=>x.name||x.plan||x.act);
+}
+function computeLog(){
+  const rows=readLog();
+  const planT=r025(rows.reduce((s,x)=>s+x.plan,0));
+  const actT =r025(rows.reduce((s,x)=>s+x.act,0));
+  const diff=r025(actT-planT);
+  const max=Math.max(0.25,...rows.map(x=>Math.max(x.plan,x.act)));
+  let bars='';
+  rows.forEach(x=>{
+    bars+=`<div class="bar-row"><span class="nm">${esc(x.name||'(無題)')}</span>`
+      +`<span class="bar-track"><span class="bar-plan" style="width:${x.plan/max*100}%"></span><span class="bar-fill" style="width:${x.act/max*100}%"></span></span>`
+      +`<span class="mn">実${nz(x.act)}/予${nz(x.plan)}h</span></div>`;});
+  document.getElementById('logBars').innerHTML=bars||'<p class="sub">行を追加して、予定・実績（0.25h単位）を入力してください。</p>';
+  document.getElementById('logTotal').textContent=
+    `実績 ${nz(actT)}h（${fmtH(Math.round(actT*60))}）／ 予定 ${nz(planT)}h ／ 差 ${sgn(diff)}h・${rows.length}件`;
+}
+function makeLog(){
+  const rows=readLog();
+  if(!rows.length){alert('タスクを1件以上入力してください。');return;}
+  computeLog();
+  const planT=r025(rows.reduce((s,x)=>s+x.plan,0));
+  const actT =r025(rows.reduce((s,x)=>s+x.act,0));
+  const diff=r025(actT-planT);
+  const kind=document.getElementById('lKind').value;
+  const date=document.getElementById('lDate').value;
+  const note=document.getElementById('lNote').value.trim();
+
+  let t=`【作業ログ｜${kind}】${date?' '+date:''}\n`;
+  t+=`実績合計：${nz(actT)}h（${fmtH(Math.round(actT*60))}）／ 予定合計：${nz(planT)}h ／ 差：${sgn(diff)}h ・ ${rows.length}件\n`;
+  t+=`\n■ 内訳（予定 → 実績）\n`+rows.map(x=>`・${x.name||'(無題)'}：予 ${nz(x.plan)}h → 実 ${nz(x.act)}h（差 ${sgn(r025(x.act-x.plan))}h）`).join('\n');
+  t+=`\n\n■ 気づき・次回の調整\n`+(note||'・________________________');
+  document.getElementById('logOut').textContent=t;
+  document.getElementById('logResult').classList.remove('hidden');
+
+  let m=`# 作業ログ（${kind}${date?' '+date:''}）\n\n`;
+  m+=`- 実績合計：${nz(actT)}h（${fmtH(Math.round(actT*60))}）\n- 予定合計：${nz(planT)}h\n- 差：${sgn(diff)}h\n- 件数：${rows.length}\n`;
+  m+=`\n## 内訳\n\n| タスク | 予定(h) | 実績(h) | 差(h) |\n| --- | ---: | ---: | ---: |\n`
+    +rows.map(x=>`| ${x.name||'(無題)'} | ${nz(x.plan)} | ${nz(x.act)} | ${sgn(r025(x.act-x.plan))} |`).join('\n')+'\n';
+  m+=`\n## 気づき・次回の調整\n\n`+(note?note.split('\n').map(s=>'- '+s).join('\n'):'- ')+'\n';
+  logMD=m;
+
+  const maxp=Math.max(0.25,...rows.map(x=>Math.max(x.plan,x.act)));
+  let p=`<div class="ptitle">📊 ${esc(kind)} 作業ログ</div><div class="psub">${esc(date||'')}</div>`;
+  p+=`<div class="pmemo"><h3>合計・サマリー</h3>`;
+  p+=`<div class="row"><b>実績合計：</b>${nz(actT)}h（${fmtH(Math.round(actT*60))}）</div>`;
+  p+=`<div class="row"><b>予定合計：</b>${nz(planT)}h　／　<b>差：</b>${sgn(diff)}h　／　${rows.length}件</div></div>`;
+  p+=`<div class="pmemo"><h3>内訳（実績バー／ラベルに予定）</h3>`
+    +rows.map(x=>`<div class="pbar"><span class="nm">${esc(x.name||'(無題)')}</span><span class="tr"><span class="fl" style="width:${x.act/maxp*100}%"></span></span><span class="mn">実${nz(x.act)} / 予${nz(x.plan)}h</span></div>`).join('')
+    +`</div>`;
+  p+=`<div class="pmemo"><h3>気づき・次回の調整</h3>`
+    +(note?note.split('\n').map(s=>`<div class="row">・${esc(s)}</div>`).join('')
+        :`<div class="row">・________________________________</div><div class="row">・________________________________</div>`)+`</div>`;
+  logPrintHTML=p;
+  lastLog={date,kind,rows:rows.map(x=>({name:x.name||'(無題)',plan:x.plan,act:x.act})),
+    planTotal:planT,actTotal:actT,total:actT,count:rows.length,note};
+  document.getElementById('logResult').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function printLog(){ if(!logMD){alert('先に「ログをまとめる」を押してください。');return;}
+  document.getElementById('printArea').innerHTML=logPrintHTML; window.print(); }
+function copyLogMD(){ if(!logMD){alert('先に「ログをまとめる」を押してください。');return;}
+  navigator.clipboard.writeText(logMD).then(()=>{const b=document.getElementById('lMdBtn');
+    b.textContent='✅ コピーしました！';b.classList.add('done');
+    setTimeout(()=>{b.textContent='📝 Markdownコピー';b.classList.remove('done');},1800);});}
+function downloadLogMD(){ if(!logMD){alert('先に「ログをまとめる」を押してください。');return;}
+  try{const blob=new Blob([logMD],{type:'text/markdown'});const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');a.href=url;a.download='作業ログ.md';
+    document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+  }catch(e){copyLogMD();alert('ダウンロードがブロックされたため、Markdownをコピーしました。');}}
+
+/* ===== monthly history ===== */
+let logHistory=[];
+const HKEY='daikoLogHistory';
+function sAct(e){return e.actTotal!=null?e.actTotal:(e.total||0);}
+function sPlan(e){return e.planTotal!=null?e.planTotal:0;}
+async function loadHistory(){
+  try{ if(window.storage){ const r=await window.storage.get(HKEY); if(r&&r.value) logHistory=JSON.parse(r.value)||[]; } }catch(e){}
+  try{ if(window.storage){ const g=await window.storage.get('daikoGoal'); if(g&&g.value){ const el=document.getElementById('histGoal'); if(el) el.value=g.value; } } }catch(e){}
+  renderHistory();
+}
+function saveGoal(){ try{ if(window.storage){ window.storage.set('daikoGoal', String(document.getElementById('histGoal').value||'')); } }catch(e){} }
+async function persistHistory(){ try{ if(window.storage){ await window.storage.set(HKEY, JSON.stringify(logHistory)); } }catch(e){} }
+function addToHistory(){
+  if(!lastLog){ alert('先に「ログをまとめる」を押してください。'); return; }
+  logHistory.push({...lastLog, id:Date.now()});
+  persistHistory(); renderHistory();
+  const b=document.getElementById('addHistBtn'); b.textContent='✅ 記録しました！'; b.classList.add('done');
+  setTimeout(()=>{b.textContent='➕ この回を記録に追加（月次集計へ）';b.classList.remove('done');},1800);
+  document.getElementById('historyCard').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function monthOf(e){ return (e.date||'').slice(0,7) || '日付なし'; }
+function groupByMonth(){
+  const map={};
+  logHistory.forEach(e=>{ const k=monthOf(e); if(!map[k]) map[k]={act:0,plan:0,sessions:0};
+    map[k].act+=sAct(e); map[k].plan+=sPlan(e); map[k].sessions++; });
+  return Object.keys(map).sort().map(k=>({month:k,act:r025(map[k].act),plan:r025(map[k].plan),sessions:map[k].sessions}));
+}
+function renderHistory(){
+  const months=groupByMonth();
+  const tot=document.getElementById('historyTotal'),bars=document.getElementById('historyBars'),
+        table=document.getElementById('historyTable'),btns=document.getElementById('historyBtns');
+  if(!logHistory.length){ tot.textContent='まだ記録がありません'; bars.innerHTML=''; table.innerHTML=''; btns.style.display='none'; return; }
+  const gAct=r025(logHistory.reduce((s,e)=>s+sAct(e),0)), gPlan=r025(logHistory.reduce((s,e)=>s+sPlan(e),0));
+  tot.textContent=`累計 実績 ${nz(gAct)}h（${fmtH(Math.round(gAct*60))}）／ 予定 ${nz(gPlan)}h・${logHistory.length}回・${months.length}か月`;
+  bars.innerHTML=lineChartSVG(months, parseFloat((document.getElementById('histGoal')||{}).value)||0);
+  table.innerHTML=months.map(m=>`<div style="font-size:13px;margin:3px 0;color:var(--ink-soft);">${esc(m.month)}：実績 <b style="color:var(--org-deep);">${nz(m.act)}h</b> ／ 予定 ${nz(m.plan)}h ／ ${m.sessions}回 ／ 平均 ${nz(r025(m.act/m.sessions))}h</div>`).join('');
+  btns.style.display='flex';
+}
+function buildHistoryMD(){
+  const months=groupByMonth();
+  const gAct=r025(logHistory.reduce((s,e)=>s+sAct(e),0)), gPlan=r025(logHistory.reduce((s,e)=>s+sPlan(e),0));
+  let m=`# 作業ログ 月次サマリー\n\n- 累計 実績：${nz(gAct)}h（${fmtH(Math.round(gAct*60))}）\n- 累計 予定：${nz(gPlan)}h\n- 記録回数：${logHistory.length}\n\n`;
+  m+=`## 月次合計・推移\n\n| 月 | 予定(h) | 実績(h) | 差(h) | 回数 |\n| --- | ---: | ---: | ---: | ---: |\n`;
+  m+=months.map(x=>`| ${x.month} | ${nz(x.plan)} | ${nz(x.act)} | ${sgn(r025(x.act-x.plan))} | ${x.sessions} |`).join('\n')+'\n\n';
+  m+=`## 記録一覧\n\n| 日付 | 種別 | 予定(h) | 実績(h) | 件数 | メモ |\n| --- | --- | ---: | ---: | ---: | --- |\n`;
+  m+=logHistory.slice().sort((a,b)=>(a.date||'').localeCompare(b.date||'')).map(e=>`| ${e.date||'-'} | ${e.kind} | ${nz(sPlan(e))} | ${nz(sAct(e))} | ${e.count} | ${(e.note||'').replace(/\n/g,' ')} |`).join('\n')+'\n';
+  return m;
+}
+function copyHistoryMD(){
+  navigator.clipboard.writeText(buildHistoryMD()).then(()=>{const b=document.getElementById('hMdBtn');
+    b.textContent='✅ コピーしました！';b.classList.add('done');
+    setTimeout(()=>{b.textContent='📝 月次Markdown';b.classList.remove('done');},1800);});
+}
+function buildHistoryCSV(){
+  const q=s=>'"'+String(s==null?'':s).replace(/"/g,'""')+'"';
+  const head='date,kind,task,plan_h,act_h\n';
+  const body=logHistory.slice().sort((a,b)=>(a.date||'').localeCompare(b.date||''))
+    .flatMap(e=>(e.rows||[]).map(r=>[q(e.date||''),q(e.kind),q(r.name),r025(r.plan||0),r025(r.act!=null?r.act:(r.min?r.min/60:0))].join(','))).join('\n');
+  return head+body+'\n';
+}
+function downloadHistoryCSV(){
+  const csv=buildHistoryCSV();
+  try{
+    const blob=new Blob(['\uFEFF'+csv],{type:'text/csv'});
+    const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='作業ログ.csv';
+    document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+  }catch(e){ navigator.clipboard.writeText(csv); alert('ダウンロード不可のため、CSVをクリップボードにコピーしました。'); }
+}
+function clearHistory(){
+  if(!logHistory.length) return;
+  if(!confirm('記録した作業ログ履歴をすべて削除します。よろしいですか？')) return;
+  logHistory=[]; persistHistory(); renderHistory();
+}
+
+/* 月次推移：折れ線（実績＝実線・予定＝破線）＋目標線（h） */
+function lineChartSVG(months, goal){
+  if(!months.length) return '';
+  goal=Math.max(0,goal||0);
+  const cs=getComputedStyle(document.body);
+  const cAct=(cs.getPropertyValue('--org-deep')||'#0B7E84').trim();
+  const cDot=(cs.getPropertyValue('--org')||'#FF4FA3').trim();
+  const cPlan=(cs.getPropertyValue('--gold')||'#FFC93C').trim();
+  const cTxt=(cs.getPropertyValue('--ink-soft')||'#5E7C79').trim();
+  const cAxis=(cs.getPropertyValue('--line')||'#BFE9E4').trim();
+  const cCard=(cs.getPropertyValue('--card')||'#fff').trim();
+  const cGoal=(cs.getPropertyValue('--coral')||'#FF6B3D').trim();
+  const W=520,H=204,L=36,R=36,T=30,B=32;
+  const iw=W-L-R, ih=H-T-B, n=months.length;
+  const maxV=Math.max(0.25,...months.map(m=>Math.max(m.act,m.plan)), goal);
+  const X=i=> n===1 ? L+iw/2 : L+iw*(i/(n-1));
+  const Y=v=> T+ih*(1-v/maxV);
+  const base=T+ih;
+  const aPts=months.map((m,i)=>`${X(i).toFixed(1)},${Y(m.act).toFixed(1)}`);
+  const pPts=months.map((m,i)=>`${X(i).toFixed(1)},${Y(m.plan).toFixed(1)}`);
+  const area=`M ${X(0).toFixed(1)},${base.toFixed(1)} L ${aPts.join(' L ')} L ${X(n-1).toFixed(1)},${base.toFixed(1)} Z`;
+  let dots='',val='',pdots='',xlab='';
+  months.forEach((m,i)=>{
+    const x=X(i),ya=Y(m.act),yp=Y(m.plan);
+    dots+=`<circle cx="${x.toFixed(1)}" cy="${ya.toFixed(1)}" r="4.4" fill="${cDot}" stroke="${cCard}" stroke-width="1.5"/>`;
+    pdots+=`<circle cx="${x.toFixed(1)}" cy="${yp.toFixed(1)}" r="2.8" fill="${cPlan}"/>`;
+    val +=`<text x="${x.toFixed(1)}" y="${(ya-9).toFixed(1)}" text-anchor="middle" font-size="10" fill="${cAct}" font-weight="800">${nz(m.act)}</text>`;
+    xlab+=`<text x="${x.toFixed(1)}" y="${H-9}" text-anchor="middle" font-size="9" fill="${cTxt}">${esc(m.month)}</text>`;
+  });
+  const seg=(y,stroke,extra='')=>`<line x1="${(X(0)-34).toFixed(1)}" y1="${y.toFixed(1)}" x2="${(X(0)+34).toFixed(1)}" y2="${y.toFixed(1)}" stroke="${stroke}" stroke-width="2.6" stroke-linecap="round" ${extra}/>`;
+  const planLine= n===1? seg(Y(months[0].plan),cPlan,'stroke-dasharray="5 4"') : `<polyline points="${pPts.join(' ')}" fill="none" stroke="${cPlan}" stroke-width="2.2" stroke-dasharray="5 4" stroke-linejoin="round" stroke-linecap="round"/>`;
+  const actLine= n===1? seg(Y(months[0].act),cAct) : `<polyline points="${aPts.join(' ')}" fill="none" stroke="${cAct}" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/>`;
+  let goalEl='';
+  if(goal>0){ const gy=Y(goal);
+    goalEl=`<line x1="${L}" y1="${gy.toFixed(1)}" x2="${W-R}" y2="${gy.toFixed(1)}" stroke="${cGoal}" stroke-width="1.6" stroke-dasharray="6 4"/>`
+      +`<text x="${(W-R).toFixed(1)}" y="${(gy-5).toFixed(1)}" text-anchor="end" font-size="9.5" fill="${cGoal}" font-weight="800">目標 ${nz(goal)}h</text>`; }
+  const legend=`<text x="${L}" y="14" font-size="9.5" fill="${cAct}" font-weight="800">― 実績</text>`
+    +`<text x="${L+58}" y="14" font-size="9.5" fill="${cPlan}" font-weight="800">┄ 予定</text>`
+    +(goal>0?`<text x="${L+116}" y="14" font-size="9.5" fill="${cGoal}" font-weight="800">┄ 目標</text>`:'');
+  return `<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto;display:block;" xmlns="http://www.w3.org/2000/svg">`
+    +`<path d="${area}" fill="rgba(70,208,200,0.18)"/>`
+    +`<line x1="${L}" y1="${base.toFixed(1)}" x2="${W-R}" y2="${base.toFixed(1)}" stroke="${cAxis}" stroke-width="1"/>`
+    +goalEl+planLine+actLine+pdots+dots+val+xlab+legend+`</svg>`;
+}
+
+/* CSV読み込み（履歴復元） */
+function parseCSV(text){
+  text=text.replace(/\r\n/g,'\n').replace(/\r/g,'\n');
+  const rows=[];let field='',row=[],q=false;
+  for(let i=0;i<text.length;i++){const c=text[i];
+    if(q){ if(c==='"'){ if(text[i+1]==='"'){field+='"';i++;} else q=false; } else field+=c; }
+    else { if(c==='"') q=true; else if(c===','){row.push(field);field='';}
+      else if(c==='\n'){row.push(field);rows.push(row);row=[];field='';} else field+=c; }
+  }
+  if(field.length||row.length){row.push(field);rows.push(row);}
+  return rows;
+}
+function importHistoryCSV(file){
+  if(!file)return;
+  const fr=new FileReader();
+  fr.onload=()=>{
+    try{
+      const rows=parseCSV(String(fr.result)).filter(r=>r.some(c=>(c||'').trim()!==''));
+      if(!rows.length){alert('CSVが空でした。');return;}
+      const head=rows[0].map(s=>(s||'').trim().toLowerCase());
+      const hasHeader=head.includes('date')||head.includes('task');
+      const find=(...names)=>{for(const nm of names){const j=head.indexOf(nm);if(j>=0)return j;}return -1;};
+      const idx={date:find('date'),kind:find('kind'),task:find('task'),
+        plan:find('plan_h','plan','planned'),act:find('act_h','act','actual'),min:find('minutes','min')};
+      const gi=(r,name,pos)=> (hasHeader&&idx[name]>=0)? r[idx[name]] : (pos!=null?r[pos]:undefined);
+      const sessions={};
+      for(let k=hasHeader?1:0;k<rows.length;k++){const r=rows[k];
+        const date=((gi(r,'date',0))||'').trim();
+        const kind=((gi(r,'kind',1))||'家事代行').trim();
+        const task=((gi(r,'task',2))||'').trim();
+        let plan=Math.max(0,parseFloat(gi(r,'plan',3))||0);
+        let act =idx.act>=0||!hasHeader ? Math.max(0,parseFloat(gi(r,'act',4))||0) : 0;
+        if((!act) && idx.min>=0){ act=Math.max(0,(parseFloat(gi(r,'min'))||0)/60); }
+        plan=r025(plan); act=r025(act);
+        if(!date&&!task&&!plan&&!act) continue;
+        const key=date+'\u0001'+kind;
+        if(!sessions[key]) sessions[key]={date,kind,rows:[],note:''};
+        sessions[key].rows.push({name:task||'(無題)',plan,act});
+      }
+      const imported=Object.values(sessions).map(s=>{
+        const planTotal=r025(s.rows.reduce((a,b)=>a+b.plan,0));
+        const actTotal=r025(s.rows.reduce((a,b)=>a+b.act,0));
+        return {date:s.date,kind:s.kind,rows:s.rows,planTotal,actTotal,total:actTotal,count:s.rows.length,note:'',id:Date.now()+Math.random()};
+      });
+      if(!imported.length){alert('読み込める行がありませんでした。ヘッダ「date,kind,task,plan_h,act_h」をご確認ください。');return;}
+      if(logHistory.length){
+        const replace=confirm(`現在の履歴（${logHistory.length}回）をCSVの${imported.length}回で置き換えます。\nOK＝置き換え／キャンセル＝追加読み込み`);
+        logHistory = replace ? imported : logHistory.concat(imported);
+      }else{ logHistory=imported; }
+      persistHistory(); renderHistory();
+      alert(`${imported.length}回分を読み込みました。`);
+    }catch(e){ alert('CSVの読み込みに失敗しました：'+e.message); }
+  };
+  fr.readAsText(file);
+}
+
+/* ===== theme (朝/昼/夜) ===== */
+function setTheme(t){
+  document.body.classList.remove('t-asa','t-hiru','t-yoru');
+  document.body.classList.add('t-'+t);
+  document.querySelectorAll('.themebar button').forEach(b=>b.classList.toggle('on', b.dataset.t===t));
+  const deco={asa:'🌅 🌸 🐰 ☕ 🕊️ 🌷 🌅', hiru:'🌺 🌊 🐰 🌸 🐚 🌴 🌺', yoru:'🌙 ⭐ 🐰 🌌 🪻 🐚 🌙'}[t];
+  const d=document.querySelector('.deco'); if(d&&deco) d.textContent=deco;
+  try{ if(window.storage) window.storage.set('daikoTheme', t); }catch(e){}
+  if(typeof renderHistory==='function' && document.getElementById('historyBars')) renderHistory();
+}
+async function initTheme(){
+  let t=null;
+  try{ if(window.storage){ const r=await window.storage.get('daikoTheme'); if(r&&r.value) t=r.value; } }catch(e){}
+  if(!t){ const h=new Date().getHours(); t=(h>=5&&h<10)?'asa':(h>=10&&h<17)?'hiru':'yoru'; }
+  setTheme(t);
+}
+
+/* init */
+switchKind();updateProg();addLogRow();addLogRow();loadHistory();initTheme();
+</script>
+</body>
+</html>

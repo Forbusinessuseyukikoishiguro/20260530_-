@@ -1,0 +1,20 @@
+①お金をかけない 文章づくり支援 🐰書きたいこと、うさぎにおまかせ。
+説明文・お知らせ・メール・要約・クイズを、AIあり/なしどちらでも。
+https://claude.ai/public/artifacts/f636c3d7-f667-4c96-8beb-7312f25e013f
+
+ーー
+②バハイ・ウサギ (Bahay Usagi) 🐰🌴
+南の島の家事代行おねがい所　〜 面白きこともなき世を面白く 〜
+Bahay（バハイ）＝タガログ語で「家・お家」／ Usagi＝うさぎ 🐇
+https://claude.ai/public/artifacts/2ec6c30a-d669-438c-a3ef-f308b73c1d76
+
+
+ーーー
+③月末報告書メーカー（Bulan Report）海辺の学校で、今月のがんばりを楽しくまとめよう 🌴 ｜ MD / PDF / CSV / メモ
+🐚 🏖️ 📋 🌺 🐠 🇵🇭 🌴
+Bulan＝タガログ語で「月」。生産性向上ツール 🐰
+
+https://claude.ai/public/artifacts/108dedbe-7822-4789-a130-4204bf376dd4
+
+
+ーーー

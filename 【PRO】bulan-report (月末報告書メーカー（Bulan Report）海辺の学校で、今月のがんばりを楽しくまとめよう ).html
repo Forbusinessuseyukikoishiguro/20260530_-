@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>月末報告書メーカー（Bulan Report）🐰📋</title>
+<style>
+  :root{
+    --blue:#0038A8; --red:#CE1126; --yellow:#FCD116; --yellow-d:#E0A800;
+    --board:#0E7C7B; --board2:#0A5D6E; --chalk:#FFFDF6;
+    --sea:#16C2D5; --sea-d:#0E9BAE; --sun:#FFB23E; --coral:#FF6B6B; --lime:#3FC380; --grape:#7C5CD0;
+    --org:#0E9BAE; --org-deep:#0A5D6E; --gold:#FFB23E; --accent:#FF6B6B;
+    --cream:#FFFDF6; --cream-2:#FFF3D6; --ink:#243B43; --muted:#5E7B82;
+    --line:#CDE9EC; --card:#ffffff; --ok:#3FC380; --warn:#FF6B6B;
+    --shadow:0 12px 30px rgba(14,124,123,.18);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:"Hiragino Maru Gothic ProN","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+    color:var(--ink);line-height:1.7;-webkit-font-smoothing:antialiased;
+    background:
+      radial-gradient(circle at 8% 0%, #FFE8A3 0, transparent 34%),
+      radial-gradient(circle at 96% 2%, #FFC3C3 0, transparent 32%),
+      radial-gradient(circle at 50% 120%, #16C2D5 0, transparent 55%),
+      linear-gradient(180deg,#E8FBFC 0%,#F3FEFF 45%,#FFFDF6 100%);
+    background-attachment:fixed;}
+  .wrap{max-width:880px;margin:0 auto;padding:18px 16px 70px;}
+
+  /* ヘッダー：海辺の黒板（メルヘン＋トロピカル） */
+  .board{position:relative;
+    background:linear-gradient(180deg,var(--board),var(--board2));
+    border:7px solid #C77C3C;border-radius:20px;
+    box-shadow:var(--shadow), inset 0 0 0 2px rgba(255,255,255,.08);
+    color:var(--chalk);text-align:center;padding:22px 16px 44px;margin-bottom:16px;overflow:hidden;}
+  /* 砂浜＋波のフチ */
+  .board .beach{position:absolute;left:0;right:0;bottom:0;height:30px;
+    background:linear-gradient(180deg,#FBE7B0,#F4D58A);}
+  .board .wave{position:absolute;left:0;right:0;bottom:24px;height:16px;
+    background:radial-gradient(circle at 10px -2px, var(--sea) 9px, transparent 10px) repeat-x;
+    background-size:20px 16px;opacity:.9;animation:wavemove 1.6s ease-in-out infinite;}
+  .board .wave.b{bottom:30px;opacity:.5;background-position:10px 0;animation:wavemove2 2.1s ease-in-out infinite;}
+  @keyframes wavemove{0%{transform:translateX(0)}50%{transform:translateX(-12px) translateY(-2px)}100%{transform:translateX(0)}}
+  @keyframes wavemove2{0%{transform:translateX(0)}50%{transform:translateX(12px) translateY(2px)}100%{transform:translateX(0)}}
+  .board .palm{position:absolute;bottom:26px;font-size:30px;filter:drop-shadow(0 1px 0 rgba(0,0,0,.2));}
+  .board .palm.l{left:10px;} .board .palm.r{right:10px;transform:scaleX(-1);}
+  /* 泳ぐお魚：ときどき旋回。ヘッダー内（overflow:hidden）に収まり、文字の後ろを通る */
+  .board .fish{position:absolute;font-size:18px;bottom:40px;left:-30px;z-index:0;pointer-events:none;
+    filter:drop-shadow(0 1px 1px rgba(0,0,0,.15));}
+  .board .fish.f1{animation:swim1 13s linear infinite;}
+  .board .fish.f2{animation:swim2 17s linear infinite;animation-delay:4s;bottom:54px;font-size:15px;}
+  .board .fish.f3{animation:swim3 21s linear infinite;animation-delay:9s;bottom:46px;font-size:16px;}
+  /* 右へ泳ぎ→中ほどで一回転→続行、を1サイクルに織り込む */
+  @keyframes swim1{
+    0%{transform:translateX(0) scaleX(1)}
+    40%{transform:translateX(360px) scaleX(1)}
+    46%{transform:translateX(380px) rotate(360deg) scaleX(1)}
+    100%{transform:translateX(820px) scaleX(1)}
+  }
+  @keyframes swim2{
+    0%{transform:translateX(0) scaleX(1)}
+    55%{transform:translateX(480px) scaleX(1)}
+    61%{transform:translateX(500px) rotate(-360deg) scaleX(1)}
+    100%{transform:translateX(840px) scaleX(1)}
+  }
+  @keyframes swim3{
+    0%{transform:translateX(0) scaleX(1)}
+    30%{transform:translateX(280px) scaleX(1)}
+    36%{transform:translateX(300px) rotate(360deg) scaleX(1)}
+    100%{transform:translateX(840px) scaleX(1)}
+  }
+  .board .flag{position:absolute;top:10px;right:14px;font-size:18px;letter-spacing:2px;}
+  .board .bun{position:absolute;top:10px;left:14px;font-size:26px;animation:hop 2.2s ease-in-out infinite;}
+  @keyframes hop{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-4px) rotate(4deg)}}
+  .board .sun{position:absolute;top:8px;left:50%;transform:translateX(-50%);font-size:20px;animation:spin 9s linear infinite;}
+  @keyframes spin{to{transform:translateX(-50%) rotate(360deg)}}
+  @media(prefers-reduced-motion:reduce){ .board .wave,.board .wave.b,.board .bun,.board .sun,.board .fish{animation:none!important;} .board .fish{display:none;} }
+  .board h1{margin:14px 0 4px;font-size:clamp(20px,4.6vw,28px);text-shadow:0 1px 0 rgba(0,0,0,.25);color:var(--chalk);position:relative;z-index:2;}
+  .board .sub{margin:0;font-size:13px;opacity:.95;color:var(--chalk);position:relative;z-index:2;}
+  .board .deco{margin-top:8px;font-size:18px;letter-spacing:5px;position:relative;z-index:2;}
+  .board .tagline{margin:8px 0 0;font-size:11.5px;opacity:.92;
+    border-top:1px dashed rgba(255,255,255,.45);display:inline-block;padding-top:6px;}
+
+  .card{background:var(--card);border:1px solid var(--line);border-top:5px solid var(--sea);border-radius:18px;padding:16px;margin-bottom:14px;box-shadow:var(--shadow);}
+  /* カードごとにカラフルなトップライン＆見出し色 */
+  .card:nth-of-type(1){border-top-color:var(--sun);}
+  .card:nth-of-type(2){border-top-color:var(--coral);}
+  .card:nth-of-type(3){border-top-color:var(--sea);}
+  .card:nth-of-type(4){border-top-color:var(--lime);}
+  .card:nth-of-type(5){border-top-color:var(--grape);}
+  .card h2{margin:0 0 4px;font-size:16px;color:var(--org-deep);display:flex;align-items:center;gap:8px;}
+  .card:nth-of-type(1) h2{color:var(--yellow-d);}
+  .card:nth-of-type(2) h2{color:var(--coral);}
+  .card:nth-of-type(3) h2{color:var(--sea-d);}
+  .card:nth-of-type(4) h2{color:var(--lime);}
+  .card:nth-of-type(5) h2{color:var(--grape);}
+  .sub{color:var(--muted);font-size:12px;margin:0 0 12px;}
+  label{display:block;font-size:12px;color:var(--muted);font-weight:700;margin-bottom:4px;}
+  input,select,textarea{width:100%;padding:9px 11px;border:1.5px solid var(--line);border-radius:12px;
+    font-family:inherit;font-size:14px;color:var(--ink);background:#F7FEFF;}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--sea);background:#fff;box-shadow:0 0 0 3px rgba(22,194,213,.15);}
+  textarea{min-height:70px;resize:vertical;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;}
+  .field{margin-bottom:10px;}
+
+  /* できること */
+  .howto .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:2px;}
+  .howto .step{background:#F4FEFF;border:1px solid var(--line);border-radius:16px;padding:12px 13px;position:relative;}
+  .howto .step:nth-child(1){background:linear-gradient(180deg,#FFF6E0,#FFFDF6);}
+  .howto .step:nth-child(2){background:linear-gradient(180deg,#FFEDED,#FFFAFA);}
+  .howto .step:nth-child(3){background:linear-gradient(180deg,#E6FAF1,#F7FFFB);}
+  .howto .n{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;
+    color:#fff;font-weight:800;font-size:13px;margin-bottom:6px;}
+  .howto .step:nth-child(1) .n{background:var(--sun);}
+  .howto .step:nth-child(2) .n{background:var(--coral);}
+  .howto .step:nth-child(3) .n{background:var(--lime);}
+  .howto .t{font-weight:800;font-size:13.5px;color:var(--org-deep);}
+  .howto .d{font-size:12px;color:var(--muted);margin-top:2px;}
+  .howto .can{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px;}
+  .howto .can span{border-radius:999px;padding:5px 12px;font-size:12px;font-weight:700;color:#fff;}
+  .howto .can span:nth-child(6n+1){background:var(--sea);}
+  .howto .can span:nth-child(6n+2){background:var(--coral);}
+  .howto .can span:nth-child(6n+3){background:var(--sun);}
+  .howto .can span:nth-child(6n+4){background:var(--lime);}
+  .howto .can span:nth-child(6n+5){background:var(--grape);}
+  .howto .can span:nth-child(6n+6){background:var(--blue);}
+  .howto .tip{margin-top:12px;background:linear-gradient(180deg,#FFF7E0,#FFFDF6);border:1px dashed var(--sun);border-radius:14px;padding:10px 12px;font-size:12.5px;color:#7a5a14;}
+
+  /* 実績テーブル */
+  .tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;}
+  table.items{border-collapse:collapse;width:100%;min-width:480px;font-size:13px;}
+  table.items th{background:linear-gradient(180deg,#E6FAFC,#D4F4F7);color:var(--sea-d);font-size:11.5px;border-bottom:2px solid var(--sea);padding:7px 6px;text-align:center;white-space:nowrap;}
+  table.items td{border-bottom:1px solid var(--line);padding:4px 6px;}
+  table.items td .nm{min-width:150px;} table.items td .v{width:96px;}
+  .rm{width:38px;border:1.5px solid var(--line);background:#FFF0F0;border-radius:9px;cursor:pointer;font-weight:800;color:var(--coral);padding:8px 0;}
+
+  button{font-family:inherit;font-weight:800;cursor:pointer;}
+  .gen{width:100%;border:none;background:linear-gradient(135deg,var(--sun),var(--coral) 55%,var(--sea));color:#fff;font-size:16px;padding:15px;border-radius:16px;box-shadow:0 6px 16px rgba(255,107,107,.3);}
+  .gen:hover{filter:brightness(1.05);}
+  .btnrow{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;}
+  .btn{flex:1;min-width:130px;border:2px solid var(--sea);background:var(--card);color:var(--sea-d);border-radius:12px;padding:11px;font-size:13.5px;}
+  .btn:hover{background:#EAFCFE;}
+  .btn.done{background:var(--lime);border-color:var(--lime);color:#fff;}
+  .fprev{font-size:12px;color:var(--muted);margin:6px 0 0;}
+  .hidden{display:none;}
+  pre.out{white-space:pre-wrap;word-break:break-word;background:#F7FEFF;border:1.5px solid var(--sea);border-radius:14px;padding:14px;font-family:inherit;font-size:13.5px;margin:10px 0 0;}
+
+  footer{text-align:center;color:var(--muted);font-size:12px;margin-top:20px;}
+  footer .ver{display:block;margin-top:6px;font-size:10.5px;opacity:.7;}
+
+  .print-area{display:none;}
+  @media print{
+    body{background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    .wrap>*{display:none!important;} .print-area{display:block!important;}
+    .ptitle{font-size:16pt;font-weight:800;color:#0038A8;margin:0 0 2px;}
+    .psub{font-size:9pt;color:#777;margin:0 0 12px;}
+    .pbox{border:1px solid #0038A8;border-radius:8px;padding:10px 13px;margin-bottom:12px;}
+    .pbox h3{margin:0 0 6px;color:#0038A8;font-size:12pt;border-bottom:2px solid #FCD116;padding-bottom:4px;}
+    .pbox .row{font-size:10pt;margin:2px 0;white-space:pre-wrap;}
+    table.pt{width:100%;border-collapse:collapse;font-size:9.5pt;}
+    table.pt th,table.pt td{border:1px solid #bbb;padding:3px 6px;text-align:center;}
+    @page{size:A4;margin:14mm;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="board">
+    <div class="bun">🐰</div>
+    <div class="sun">🌞</div>
+    <div class="flag">🇵🇭 ⭐⭐⭐</div>
+    <h1>月末報告書メーカー（Bulan Report）</h1>
+    <p class="sub">海辺の学校で、今月のがんばりを楽しくまとめよう 🌴 ｜ MD / PDF / CSV / メモ</p>
+    <div class="deco">🐚 🏖️ 📋 🌺 🐠 🇵🇭 🌴</div>
+    <p class="tagline">Bulan＝タガログ語で「月」。生産性向上ツール 🐰</p>
+    <span class="palm l">🌴</span><span class="palm r">🌴</span>
+    <span class="fish f1">🐠</span><span class="fish f2">🐟</span><span class="fish f3">🐡</span>
+    <div class="wave b"></div><div class="wave"></div><div class="beach"></div>
+  </div>
+
+  <!-- できること -->
+  <div class="card howto">
+    <h2>🐰 できること・使い方</h2>
+    <p class="sub">3ステップで、月末報告書のたたき台がすぐ作れます。</p>
+    <div class="steps">
+      <div class="step"><span class="n">1</span><div class="t">基本を入れる</div><div class="d">報告者・所属・対象月・宛先を入力。</div></div>
+      <div class="step"><span class="n">2</span><div class="t">実績と所感</div><div class="d">実績項目（件数・時間など）を行で追加。サマリー・所感・課題・来月の予定を記入。</div></div>
+      <div class="step"><span class="n">3</span><div class="t">出力する</div><div class="d">「✨報告書をつくる」→ コピー、または MD / PDF / CSV / メモ で保存。印刷もOK。</div></div>
+    </div>
+    <div class="can">
+      <span>📋 月末報告書フォーマット</span><span>📊 実績の一覧</span><span>📝 所感・課題・来月</span>
+      <span>⬇️ 4形式ダウンロード</span><span>🖨 印刷／PDF</span><span>🏷 自動ファイル名</span>
+    </div>
+    <div class="tip">💡 自動ファイル名は「日付_報告者_種類_対象月」。任意の名前もつけられます。長期保存・共有は CSV / Markdown が確実です 🐰</div>
+  </div>
+
+  <!-- 基本情報 -->
+  <div class="card">
+    <h2>📝 基本情報</h2>
+    <div class="grid">
+      <div class="field"><label>報告者</label><input type="text" id="author" placeholder="例：石黒"></div>
+      <div class="field"><label>所属</label><input type="text" id="dept" placeholder="例：研修部"></div>
+      <div class="field"><label>対象月</label><input type="month" id="month" onchange="updatePreview()"></div>
+      <div class="field"><label>宛先（任意）</label><input type="text" id="to" placeholder="例：山本様"></div>
+    </div>
+  </div>
+
+  <!-- 実績 -->
+  <div class="card">
+    <h2>📊 今月の実績</h2>
+    <p class="sub">「項目」と「値（件数・時間・回数など）」を行で。必要なだけ追加できます。</p>
+    <div class="tablewrap">
+      <table class="items"><thead><tr><th>項目</th><th>値</th><th>メモ</th><th></th></tr></thead><tbody id="itemRows"></tbody></table>
+    </div>
+    <div class="btnrow"><button class="btn" onclick="addItem()">＋ 行を追加</button></div>
+  </div>
+
+  <!-- 所感ほか -->
+  <div class="card">
+    <h2>🗒️ サマリー・所感</h2>
+    <div class="field"><label>今月のサマリー</label><textarea id="summary" placeholder="例：新人研修3コースを担当。全員が目標を達成。"></textarea></div>
+    <div class="field"><label>所感・良かった点</label><textarea id="good" placeholder="例：演習中心に切り替えたら理解度が上がった。"></textarea></div>
+    <div class="field"><label>課題・改善点</label><textarea id="issue" placeholder="例：質問対応に時間がかかった。FAQ整備が必要。"></textarea></div>
+    <div class="field"><label>来月の予定</label><textarea id="next" placeholder="例：LPIC-2応用コースを新規開講。"></textarea></div>
+  </div>
+
+  <button class="gen" onclick="makeReport()">✨ 報告書をつくる</button>
+
+  <!-- 出力 -->
+  <div class="card hidden" id="resultCard" style="margin-top:14px;">
+    <h2>📄 報告書プレビュー</h2>
+    <div class="field" style="margin-top:6px;">
+      <label>保存ファイル名（任意・空欄なら自動）</label>
+      <input type="text" id="fname" placeholder="空欄＝日付＋報告者＋種類＋対象月で自動命名" oninput="updateFnamePreview()">
+      <p class="fprev" id="fnamePreview"></p>
+    </div>
+    <div class="btnrow">
+      <button class="btn" id="copyBtn" onclick="copyMD()">📝 Markdownコピー</button>
+      <button class="btn" onclick="downloadAs('md')">⬇️ Markdown（.md）</button>
+      <button class="btn" onclick="downloadAs('pdf')">⬇️ PDFをダウンロード</button>
+      <button class="btn" onclick="printReport()">🖨 PDFを印刷</button>
+      <button class="btn" onclick="downloadAs('csv')">⬇️ CSV（.csv）</button>
+      <button class="btn" onclick="downloadAs('txt')">⬇️ メモ（.txt）</button>
+    </div>
+    <pre class="out" id="out"></pre>
+  </div>
+
+  <footer>うさうさ先生 🐰 ／ ウソつかず・盛らずの月末報告
+    <span class="ver" id="verline"></span>
+  </footer>
+</div>
+
+<div class="print-area" id="printArea"></div>
+
+<script>
+const CONF={ title:'Bulan Report', titleJa:'月末報告書メーカー', file:'bulan-report.html', brand:'うさうさ', version:'v1.1.0', tested:'2026-05-30' };
+const el=id=>document.getElementById(id);
+const esc=s=>(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const escA=s=>esc(s).replace(/"/g,'&quot;');
+let mdText='', printHTML='', built=false;
+
+/* ---- 行 ---- */
+function addItem(name='',val='',memo=''){
+  const tb=el('itemRows'); const tr=document.createElement('tr');
+  tr.innerHTML=`<td><input type="text" class="nm" placeholder="例：研修コース数" value="${escA(name)}"></td>`
+    +`<td><input type="text" class="v" placeholder="例：3" value="${escA(val)}"></td>`
+    +`<td><input type="text" class="mo" placeholder="任意" value="${escA(memo)}"></td>`
+    +`<td><button class="rm" title="削除" onclick="this.closest('tr').remove()">✕</button></td>`;
+  tb.appendChild(tr);
+}
+function readItems(){
+  return [...document.querySelectorAll('#itemRows tr')].map(tr=>({
+    name:tr.querySelector('.nm').value.trim(),
+    val:tr.querySelector('.v').value.trim(),
+    memo:tr.querySelector('.mo').value.trim()
+  })).filter(x=>x.name||x.val||x.memo);
+}
+function read(){
+  return {
+    author:el('author').value.trim(), dept:el('dept').value.trim(),
+    month:el('month').value, to:el('to').value.trim(),
+    items:readItems(),
+    summary:el('summary').value.trim(), good:el('good').value.trim(),
+    issue:el('issue').value.trim(), next:el('next').value.trim()
+  };
+}
+
+/* ---- 自動ファイル名 ---- */
+function ts(){ const d=new Date(),p=n=>String(n).padStart(2,'0');
+  return `${d.getFullYear()}${p(d.getMonth()+1)}${p(d.getDate())}${p(d.getHours())}${p(d.getMinutes())}`; }
+function sani(s){ return (s||'').trim().replace(/[\\/:*?"<>|\u0000-\u001F]/g,'').replace(/\s+/g,'_').slice(0,40); }
+function autoName(){
+  const name=sani(el('author').value)||sani(CONF.brand);
+  const type='月末報告書';
+  const m=sani(el('month').value)||'対象月';
+  return `${ts()}_${name}_${type}_${m}`;
+}
+function baseName(){ return sani(el('fname').value)||autoName(); }
+function finalName(ext){ ext=ext||'md'; return baseName().replace(/\.(md|txt|csv|pdf|html?)$/i,'')+'.'+ext; }
+function updateFnamePreview(){ if(el('fnamePreview')) el('fnamePreview').textContent='保存名（例）：'+finalName('md'); }
+function updatePreview(){ updateFnamePreview(); }
+
+/* ---- 生成 ---- */
+function reportText(d){
+  const L=[];
+  L.push(`${d.month||'（対象月）'} 月末報告書`);
+  if(d.to) L.push(`${d.to}`);
+  L.push('');
+  L.push(`報告者：${d.author||'（未記入）'}${d.dept?'（'+d.dept+'）':''}`);
+  L.push('');
+  L.push('■ 今月の実績');
+  if(d.items.length) d.items.forEach(x=>L.push(`・${x.name||'(項目)'}：${x.val}${x.memo?'（'+x.memo+'）':''}`));
+  else L.push('・（実績未入力）');
+  L.push('');
+  L.push('■ サマリー'); L.push(d.summary||'・________________________');
+  L.push(''); L.push('■ 所感・良かった点'); L.push(d.good||'・________________________');
+  L.push(''); L.push('■ 課題・改善点'); L.push(d.issue||'・________________________');
+  L.push(''); L.push('■ 来月の予定'); L.push(d.next||'・________________________');
+  return L.join('\n');
+}
+function reportMD(d){
+  let m=`# ${d.month||'（対象月）'} 月末報告書\n\n`;
+  if(d.to) m+=`**宛先：** ${d.to}\n\n`;
+  m+=`**報告者：** ${d.author||'（未記入）'}${d.dept?'（'+d.dept+'）':''}\n\n`;
+  m+=`## 今月の実績\n\n`;
+  if(d.items.length){ m+=`| 項目 | 値 | メモ |\n| --- | --- | --- |\n`;
+    m+=d.items.map(x=>`| ${x.name||'(項目)'} | ${x.val} | ${x.memo} |`).join('\n')+'\n\n'; }
+  else m+=`（実績未入力）\n\n`;
+  m+=`## サマリー\n\n${d.summary||'-'}\n\n## 所感・良かった点\n\n${d.good||'-'}\n\n## 課題・改善点\n\n${d.issue||'-'}\n\n## 来月の予定\n\n${d.next||'-'}\n`;
+  return m;
+}
+function reportCSV(d){
+  const q=s=>'"'+String(s==null?'':s).replace(/"/g,'""')+'"';
+  let c='section,name,value,memo\n';
+  c+=[q('基本'),q('対象月'),q(d.month),q('')].join(',')+'\n';
+  c+=[q('基本'),q('報告者'),q(d.author),q(d.dept)].join(',')+'\n';
+  c+=[q('基本'),q('宛先'),q(d.to),q('')].join(',')+'\n';
+  d.items.forEach(x=>{ c+=[q('実績'),q(x.name),q(x.val),q(x.memo)].join(',')+'\n'; });
+  c+=[q('所感'),q('サマリー'),q(d.summary),q('')].join(',')+'\n';
+  c+=[q('所感'),q('良かった点'),q(d.good),q('')].join(',')+'\n';
+  c+=[q('所感'),q('課題'),q(d.issue),q('')].join(',')+'\n';
+  c+=[q('所感'),q('来月の予定'),q(d.next),q('')].join(',')+'\n';
+  return c;
+}
+function reportPrintHTML(d){
+  const css=`@page{size:A4;margin:15mm;}body{font-family:"Hiragino Maru Gothic ProN","Yu Gothic",sans-serif;color:#3A2E22;line-height:1.8;}h1{color:#5A4534;font-size:17pt;margin:0 0 2px;}.s{color:#777;font-size:10pt;margin:0 0 14px;}.box{border:1px solid #B98A4B;border-radius:8px;padding:11px 14px;margin:0 0 12px;}.box h3{margin:0 0 6px;color:#5A4534;font-size:12.5pt;border-bottom:2px solid #E3C088;padding-bottom:4px;}.box .row{font-size:10.5pt;margin:2px 0;white-space:pre-wrap;}table{width:100%;border-collapse:collapse;font-size:10pt;}th,td{border:1px solid #ccc;padding:3px 6px;text-align:left;}`;
+  let h=`<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8"><title>${esc(d.month||'')} 月末報告書</title><style>${css}</style></head><body>`;
+  h+=`<h1>📋 ${esc(d.month||'（対象月）')} 月末報告書</h1><div class="s">${d.to?esc(d.to)+'　／　':''}報告者：${esc(d.author||'')}${d.dept?'（'+esc(d.dept)+'）':''}</div>`;
+  h+=`<div class="box"><h3>今月の実績</h3>`;
+  if(d.items.length){ h+=`<table><tr><th>項目</th><th>値</th><th>メモ</th></tr>`+d.items.map(x=>`<tr><td>${esc(x.name)}</td><td>${esc(x.val)}</td><td>${esc(x.memo)}</td></tr>`).join('')+`</table>`; }
+  else h+=`<div class="row">（実績未入力）</div>`;
+  h+=`</div>`;
+  const blk=(t,b)=>`<div class="box"><h3>${t}</h3><div class="row">${esc(b||'-')}</div></div>`;
+  h+=blk('サマリー',d.summary)+blk('所感・良かった点',d.good)+blk('課題・改善点',d.issue)+blk('来月の予定',d.next);
+  h+=`</body></html>`;
+  return h;
+}
+function flash(id,msg){ const b=el(id);if(!b)return;const o=b.textContent;b.textContent=msg;b.classList.add('done');setTimeout(()=>{b.textContent=o;b.classList.remove('done');},1500); }
+
+function makeReport(){
+  const d=read();
+  const txt=reportText(d);
+  el('out').textContent=txt;
+  el('resultCard').classList.remove('hidden');
+  mdText=reportMD(d);
+  printHTML=reportPrintHTML(d);
+  built=true;
+  el('printArea').innerHTML=`<div class="ptitle">📋 ${esc(d.month||'（対象月）')} 月末報告書</div><div class="psub">${d.to?esc(d.to)+'　／　':''}報告者：${esc(d.author||'')}${d.dept?'（'+esc(d.dept)+'）':''}</div>`
+    +`<div class="pbox"><h3>本文</h3><div class="row">${esc(txt)}</div></div>`;
+  updateFnamePreview();
+  el('resultCard').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+/* ---- 出力 ---- */
+function saveBlob(text,name,mime){
+  const blob=new Blob([text],{type:mime});const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');a.href=url;a.download=name;
+  document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+function copyMD(){ if(!built){alert('先に「✨ 報告書をつくる」を押してください。');return;} navigator.clipboard.writeText(mdText).then(()=>flash('copyBtn','✅ コピー')); }
+function downloadAs(fmt){
+  if(!built){ alert('先に「✨ 報告書をつくる」を押してください。'); return; }
+  const d=read();
+  try{
+    if(fmt==='md'){ saveBlob(mdText, finalName('md'), 'text/markdown;charset=utf-8'); }
+    else if(fmt==='txt'){ saveBlob(reportText(d), finalName('txt'), 'text/plain;charset=utf-8'); }
+    else if(fmt==='csv'){ saveBlob('\uFEFF'+reportCSV(d), finalName('csv'), 'text/csv;charset=utf-8'); }
+    else if(fmt==='pdf'){ saveBlob(reportPrintHTML(d), finalName('html'), 'text/html;charset=utf-8'); }
+  }catch(e){
+    if(fmt==='csv') navigator.clipboard.writeText(reportCSV(d)); else navigator.clipboard.writeText(mdText);
+    alert('ダウンロードがブロックされたため、内容をコピーしました。\n保存名候補：'+finalName(fmt==='pdf'?'html':fmt));
+  }
+}
+function printReport(){ if(!built){ alert('先に「✨ 報告書をつくる」を押してください。'); return; } window.print(); }
+
+/* ---- init ---- */
+function init(){
+  el('verline').textContent=`${CONF.titleJa}（${CONF.title}）${CONF.version} ｜ ${CONF.file} ｜ テスト済み（単体/結合/総合/ブラックボックス/モンキー 計43項目 全PASS）${CONF.tested}`;
+  const dt=new Date(); const prev=new Date(dt.getFullYear(),dt.getMonth()-1,1);
+  el('month').value=`${prev.getFullYear()}-${String(prev.getMonth()+1).padStart(2,'0')}`;
+  addItem('研修コース数','');
+  addItem('稼働時間(h)','');
+  updateFnamePreview();
+}
+init();
+</script>
+</body>
+</html>

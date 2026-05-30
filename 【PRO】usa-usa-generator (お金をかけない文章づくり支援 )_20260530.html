@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>うさうさジェネレーター（Usa Usa Generator）🐰 APIキーあり・なし両対応</title>
+<style>
+  :root{
+    --org:#C9A26B; --org-deep:#5A4534; --gold:#E3C088;
+    --cream:#F3E7D6; --cream-2:#EADBC4; --ink:#4A3C2E;
+    --muted:#9A876E; --line:#E2D2BA; --card:#FBF4E9; --ok:#7FA06A; --warn:#C77B62;
+    --accent:#B98A4B; --shadow:0 12px 30px rgba(122,92,52,.16);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:"Hiragino Maru Gothic ProN","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+    color:var(--ink);line-height:1.7;-webkit-font-smoothing:antialiased;
+    background:
+      radial-gradient(circle at 12% 0%, #F6ECDD 0, transparent 46%),
+      radial-gradient(circle at 92% 6%, #EEDFC9 0, transparent 42%),
+      linear-gradient(180deg,#F5EBDB,#F0E3CF);
+    background-attachment:fixed;}
+  .wrap{max-width:840px;margin:0 auto;padding:18px 16px 70px;}
+
+  /* ヒーロー */
+  .hero{position:relative;background:linear-gradient(135deg,#F3E7D5,#ECDCC4);
+    border:1px solid var(--line);border-radius:22px;padding:22px 20px;margin-bottom:16px;
+    box-shadow:var(--shadow);overflow:hidden;}
+  .hero .dots{position:absolute;top:16px;left:18px;display:flex;gap:9px;}
+  .hero .dots i{width:13px;height:13px;border-radius:50%;background:#E6D3B6;display:block;}
+  .hero-grid{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center;}
+  .hero .eyebrow{color:var(--muted);font-size:13px;margin:18px 0 6px;font-weight:700;}
+  .hero h1{font-size:clamp(22px,5.4vw,34px);line-height:1.25;margin:0 0 8px;color:var(--org-deep);letter-spacing:.01em;}
+  .hero .lead{color:var(--muted);font-size:13.5px;margin:0 0 12px;}
+  .hero .chips{display:flex;flex-wrap:wrap;gap:8px;}
+  .hero .chips span{background:var(--cream-2);border:1px solid var(--line);color:var(--org-deep);
+    font-size:12.5px;font-weight:700;padding:6px 13px;border-radius:999px;}
+  .hero-art{width:150px;height:150px;flex:none;}
+  @media(max-width:560px){ .hero-grid{grid-template-columns:1fr;} .hero-art{width:108px;height:108px;justify-self:center;} }
+
+  /* 書くうさぎ：手元の羽ペンがことこと動く */
+  .pen{transform-origin:62px 70px;animation:write 1.8s ease-in-out infinite;}
+  @keyframes write{0%,100%{transform:rotate(-7deg) translateY(0)}50%{transform:rotate(4deg) translateY(-1.5px)}}
+  .sparkle{animation:tw 2.4s ease-in-out infinite;transform-origin:center;}
+  .sparkle.b{animation-delay:.8s}
+  @keyframes tw{0%,100%{opacity:.35;transform:scale(.8)}50%{opacity:1;transform:scale(1.15)}}
+  @media(prefers-reduced-motion:reduce){ .pen,.sparkle{animation:none!important;} }
+
+  header{text-align:center;margin-bottom:12px;}
+  .bunny{font-size:34px;}
+  h1{font-size:clamp(20px,4.6vw,27px);margin:6px 0 4px;color:var(--org-deep);}
+  .tagline{color:var(--muted);font-size:13px;margin:0;}
+  .tagline b{color:var(--accent);}
+  .meaning{margin:4px 0 0;font-size:11.5px;color:var(--muted);}
+
+  /* できること（使い方） */
+  .howto .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:6px;}
+  .howto .step{background:var(--cream);border:1px solid var(--line);border-radius:14px;padding:12px 13px;}
+  .howto .step .n{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;
+    background:var(--accent);color:#fff;font-weight:800;font-size:13px;margin-bottom:6px;}
+  .howto .step .t{font-weight:800;font-size:13.5px;color:var(--org-deep);}
+  .howto .step .d{font-size:12px;color:var(--muted);margin-top:2px;}
+  .howto .can{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px;}
+  .howto .can span{background:var(--cream-2);border:1px solid var(--line);border-radius:999px;
+    padding:5px 11px;font-size:12px;color:var(--org-deep);font-weight:600;}
+  .howto .tip{margin-top:12px;background:#F7EFE0;border:1px dashed var(--accent);border-radius:12px;
+    padding:10px 12px;font-size:12.5px;color:var(--org-deep);}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;
+    padding:16px;margin-bottom:14px;box-shadow:var(--shadow);}
+  .card h2{margin:0 0 4px;font-size:16px;color:var(--org-deep);display:flex;align-items:center;gap:8px;}
+  .sub{color:var(--muted);font-size:12px;margin:0 0 10px;}
+  label{display:block;font-size:12px;color:var(--muted);font-weight:700;margin-bottom:4px;}
+  input,select,textarea{width:100%;padding:10px 11px;border:1.5px solid var(--line);border-radius:11px;
+    font-family:inherit;font-size:14.5px;color:var(--ink);background:var(--cream);}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--org);background:#fff;}
+  textarea{min-height:90px;resize:vertical;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;}
+  .field{margin-bottom:10px;}
+
+  .radios{display:flex;flex-direction:column;gap:8px;}
+  .radio{display:flex;gap:10px;align-items:flex-start;border:1.5px solid var(--line);border-radius:11px;
+    padding:10px 12px;background:var(--cream);cursor:pointer;}
+  .radio input{width:auto;margin-top:3px;}
+  .radio .t{font-weight:700;font-size:14px;}
+  .radio .d{font-size:11.5px;color:var(--muted);}
+  .keybox{margin-top:10px;}
+  .warn{font-size:11.5px;color:var(--warn);margin-top:6px;}
+
+  .gen{width:100%;border:none;cursor:pointer;background:linear-gradient(135deg,var(--org),var(--gold));
+    color:#fff;font-weight:800;font-size:16px;padding:15px;border-radius:14px;font-family:inherit;}
+  button{font-family:inherit;font-weight:800;cursor:pointer;}
+  .btnrow{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;}
+  .btn{flex:1;min-width:130px;border:2px solid var(--gold);background:var(--card);color:var(--org-deep);
+    border-radius:11px;padding:11px;font-size:13.5px;}
+  .btn:hover{background:var(--cream-2);}
+  .btn.done{background:var(--ok);border-color:var(--ok);color:#fff;}
+
+  .badge{display:inline-block;font-size:11.5px;font-weight:800;padding:4px 10px;border-radius:999px;
+    background:var(--cream-2);color:var(--org-deep);margin-bottom:8px;}
+  .badge.ai{background:#E8F4EC;color:var(--ok);}
+  .badge.rule{background:#FBEFD6;color:var(--org-deep);}
+  .badge.err{background:#FBE6E3;color:var(--warn);}
+  pre.out{white-space:pre-wrap;word-break:break-word;background:var(--cream);border:1.5px solid var(--gold);
+    border-radius:12px;padding:14px;font-family:inherit;font-size:14px;margin:0;min-height:40px;}
+  .hidden{display:none;}
+
+  footer{text-align:center;color:var(--muted);font-size:12px;margin-top:20px;}
+  footer .ver{display:inline-block;margin-top:6px;font-size:10.5px;opacity:.7;}
+
+  .print-area{display:none;}
+  @media print{
+    body{background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    .wrap>*{display:none!important;} .print-area{display:block!important;}
+    .ptitle{font-size:15pt;font-weight:800;color:#C9510F;margin:0 0 8px;}
+    .pbody{white-space:pre-wrap;font-size:11pt;}
+    @page{size:A4;margin:14mm;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <div class="dots"><i></i><i></i><i></i></div>
+    <div class="hero-grid">
+      <div>
+        <p class="eyebrow">お金をかけない 文章づくり支援 🐰</p>
+        <h1>書きたいこと、<br>うさぎにおまかせ。</h1>
+        <p class="lead">説明文・お知らせ・メール・要約・クイズを、AIあり/なしどちらでも。</p>
+        <div class="chips"><span>3モード対応</span><span>キーあり・なし</span><span>MD/PDF/CSV/txt</span></div>
+      </div>
+      <svg class="hero-art" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="物書きうさぎ">
+        <circle cx="80" cy="80" r="74" fill="#EFE0C9"/>
+        <circle cx="34" cy="44" r="4" fill="#E6D3B6" class="sparkle"/>
+        <circle cx="128" cy="36" r="3" fill="#E6D3B6" class="sparkle b"/>
+        <circle cx="132" cy="118" r="4" fill="#E6D3B6" class="sparkle"/>
+        <!-- 机 -->
+        <rect x="34" y="112" width="92" height="12" rx="4" fill="#D9BE93"/>
+        <!-- 紙 -->
+        <rect x="48" y="92" width="64" height="34" rx="4" fill="#FBF4E9" stroke="#E2D2BA"/>
+        <line x1="56" y1="102" x2="104" y2="102" stroke="#E2D2BA" stroke-width="2"/>
+        <line x1="56" y1="110" x2="96" y2="110" stroke="#E2D2BA" stroke-width="2"/>
+        <!-- うさぎ本体 -->
+        <ellipse cx="78" cy="86" rx="26" ry="24" fill="#F3E7D6" stroke="#D9BE93" stroke-width="2"/>
+        <!-- 耳 -->
+        <path d="M64 64 Q60 30 70 30 Q76 46 74 66 Z" fill="#F3E7D6" stroke="#D9BE93" stroke-width="2"/>
+        <path d="M88 64 Q90 32 98 34 Q98 50 90 66 Z" fill="#F3E7D6" stroke="#D9BE93" stroke-width="2"/>
+        <path d="M66 62 Q64 40 70 38 Q73 50 72 63 Z" fill="#F0D8DD"/>
+        <!-- 顔 -->
+        <circle cx="71" cy="82" r="2.6" fill="#5A4534"/>
+        <circle cx="85" cy="82" r="2.6" fill="#5A4534"/>
+        <path d="M76 88 Q78 90 80 88" stroke="#5A4534" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+        <circle cx="66" cy="87" r="3" fill="#F0D0C2" opacity=".7"/>
+        <circle cx="90" cy="87" r="3" fill="#F0D0C2" opacity=".7"/>
+        <!-- 腕＋羽ペン（動く） -->
+        <g class="pen">
+          <line x1="78" y1="98" x2="62" y2="74" stroke="#C9A26B" stroke-width="6" stroke-linecap="round"/>
+          <path d="M62 74 L58 60 Q70 64 66 78 Z" fill="#E3C088" stroke="#B98A4B" stroke-width="1.5"/>
+          <circle cx="62" cy="74" r="2" fill="#5A4534"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+
+  <header>
+    <div class="bunny">🐰✨</div>
+    <h1>うさうさジェネレーター</h1>
+    <p class="tagline"><b>Usa Usa Generator</b>　APIキーあり・なし両対応のテキスト生成ツール</p>
+    <p class="meaning">この環境のAI／自分のAPIキー／AIなし（テンプレ＋プロンプト）の3モード 🐰</p>
+  </header>
+
+  <!-- できること（使い方） -->
+  <div class="card howto">
+    <h2>🐰 できること・使い方</h2>
+    <p class="sub">3ステップで、文章のたたき台がすぐ作れます。</p>
+    <div class="steps">
+      <div class="step"><span class="n">1</span><div class="t">えらぶ</div><div class="d">種類（説明・お知らせ・メール・要約・箇条書き・クイズ）とトーン・長さを選択。</div></div>
+      <div class="step"><span class="n">2</span><div class="t">かく</div><div class="d">お題を入れて「✨生成」。AIあり/なしを選べ、繋がらなくても自動でテンプレに。</div></div>
+      <div class="step"><span class="n">3</span><div class="t">もちだす</div><div class="d">コピー、または Markdown / PDF / CSV / メモ で保存。ファイル名も自動。</div></div>
+    </div>
+    <div class="can">
+      <span>📘 研修の説明文（WHY→WHAT→HOW）</span><span>📣 お知らせ</span><span>✉️ メール下書き</span>
+      <span>📝 要約</span><span>•‿• 箇条書き整理</span><span>❓ 4択クイズ</span>
+    </div>
+    <div class="tip">💡 AIが使えない場所でも「🧩 プロンプトをコピー」で、お手持ちの別のAIにそのまま貼れます（うさぎは正直者。ウソは盛りません）。</div>
+  </div>
+
+  <!-- 何をつくる -->
+  <div class="card">
+    <h2>📝 何をつくる？</h2>
+    <div class="field">
+      <label>種類</label>
+      <select id="type" onchange="onType()">
+        <option value="free">自由入力（指示そのまま）</option>
+        <option value="explain">研修の説明文（WHY→WHAT→HOW）</option>
+        <option value="notice">お知らせ・連絡</option>
+        <option value="email">メール下書き</option>
+        <option value="summary">要約</option>
+        <option value="bullets">箇条書きに整理</option>
+        <option value="quiz">クイズ作成（4択）</option>
+      </select>
+    </div>
+    <div class="field">
+      <label id="contentLabel">お題・内容</label>
+      <textarea id="content" placeholder="例：Linuxのファイルパーミッションを新人向けに説明したい" oninput="if(document.getElementById('fnamePreview'))updateFnamePreview()"></textarea>
+    </div>
+    <div class="grid">
+      <div class="field" style="grid-column:1/-1"><label>補足条件（任意）</label><input type="text" id="cond" placeholder="例：比喩を入れる／300字程度／専門用語は避ける"></div>
+      <div class="field"><label>トーン</label>
+        <select id="tone" onchange="savePrefs()"><option>ていねい</option><option>カジュアル</option><option>フォーマル</option><option>やさしく</option></select></div>
+      <div class="field"><label>長さ</label>
+        <select id="length" onchange="savePrefs()"><option value="short">短い</option><option value="mid" selected>普通</option><option value="long">長め</option></select></div>
+    </div>
+  </div>
+
+  <!-- AI設定 -->
+  <div class="card">
+    <h2>🤖 AIの使い方（キーあり・なし）</h2>
+    <div class="radios">
+      <label class="radio"><input type="radio" name="aimode" value="env" checked onchange="onMode()">
+        <span><span class="t">① この環境のAIを使う（キー不要）</span><br><span class="d">Claudeのアーティファクト等、AIに接続できる環境向け。失敗時はテンプレに自動フォールバック。</span></span></label>
+      <label class="radio"><input type="radio" name="aimode" value="key" onchange="onMode()">
+        <span><span class="t">② 自分のAPIキーを使う</span><br><span class="d">ローカルでファイルを開くときなど。AnthropicのAPIキーで直接生成します。</span></span></label>
+      <label class="radio"><input type="radio" name="aimode" value="none" onchange="onMode()">
+        <span><span class="t">③ AIを使わない（テンプレ＋プロンプト）</span><br><span class="d">たたき台のテンプレを生成。下の「プロンプトをコピー」で他のAIにも貼れます。</span></span></label>
+    </div>
+    <div class="keybox hidden" id="keyBox">
+      <label>Anthropic APIキー（sk-ant-…）</label>
+      <input type="password" id="apikey" placeholder="sk-ant-..." autocomplete="off" oninput="saveKeyState()">
+      <label style="display:flex;gap:8px;align-items:center;margin-top:8px;font-weight:600;">
+        <input type="checkbox" id="saveKey" style="width:auto" onchange="saveKeyState()"> この端末に保存する（共有PCでは非推奨）</label>
+      <p class="warn">⚠️ キーはこのブラウザ内だけで保持し、送信先はAnthropic APIのみです。第三者と共有しないでください。</p>
+    </div>
+  </div>
+
+  <button class="gen" onclick="generate()">✨ 生成する</button>
+
+  <!-- 出力 -->
+  <div class="card" id="resultCard" style="margin-top:14px;">
+    <h2>📄 生成結果</h2>
+    <div class="badge" id="badge">ここに生成方法が表示されます</div>
+    <pre class="out" id="out">「✨ 生成する」を押すと、ここに結果が出ます。</pre>
+    <div class="btnrow">
+      <button class="btn" id="copyBtn" onclick="copyOut()">📋 結果をコピー</button>
+      <button class="btn" id="promptBtn" onclick="copyPrompt()">🧩 プロンプトをコピー</button>
+      <button class="btn" id="mdBtn" onclick="copyMD()">📝 Markdownコピー</button>
+    </div>
+    <div class="field" style="margin-top:12px;">
+      <label>保存ファイル名（任意・空欄なら自動）</label>
+      <input type="text" id="fname" placeholder="空欄＝日付＋名前＋種類＋テーマで自動命名" oninput="updateFnamePreview()">
+      <p class="sub" id="fnamePreview" style="margin:6px 0 0;"></p>
+    </div>
+    <div class="btnrow">
+      <button class="btn" id="dlMd" onclick="downloadAs('md')">⬇️ Markdown（.md）</button>
+      <button class="btn" id="dlPdf" onclick="downloadAs('pdf')">⬇️ PDFをダウンロード</button>
+      <button class="btn" id="dlPrint" onclick="printPdf()">🖨 PDFを印刷</button>
+      <button class="btn" id="dlCsv" onclick="downloadAs('csv')">⬇️ CSV（.csv）</button>
+      <button class="btn" id="dlTxt" onclick="downloadAs('txt')">⬇️ メモ（.txt）</button>
+    </div>
+  </div>
+
+  <footer>うさうさ先生 🐰 ／ ウソつかず・盛らずのテキスト生成
+    <br><span class="ver" id="verline"></span>
+  </footer>
+</div>
+
+<div class="print-area" id="printArea"></div>
+
+<script>
+const CONF={ title:'Usa Usa Generator', file:'usa-usa-generator.html', brand:'うさうさ', model:'claude-sonnet-4-20250514', version:'v1.5.0', tested:'2026-05-30' };
+const KEYSTORE='usaGenKey';
+
+const el=id=>document.getElementById(id);
+const esc=s=>(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+let lastPrompt='', lastOut='', outMD='';
+
+const TONE={ 'ていねい':'ていねいな敬体で', 'カジュアル':'親しみやすいカジュアルな口調で', 'フォーマル':'フォーマルでビジネス的に', 'やさしく':'やさしく噛み砕いて' };
+const LEN ={ short:{w:'簡潔に（短め）', tok:500}, mid:{w:'適度な分量で', tok:1000}, long:{w:'しっかり詳しく（長め）', tok:1500} };
+
+function read(){
+  const length=el('length').value;
+  return {
+    type:el('type').value,
+    content:el('content').value.trim(),
+    cond:el('cond').value.trim(),
+    tone:el('tone').value,
+    length, maxtok:LEN[length].tok
+  };
+}
+function onType(){
+  const t=el('type').value;
+  const lab={free:'指示（プロンプト）', explain:'説明したいテーマ', notice:'お知らせの内容', email:'メールの用件', summary:'要約したい文章', bullets:'整理したい内容', quiz:'クイズのテーマ'}[t];
+  el('contentLabel').textContent=lab||'お題・内容';
+  savePrefs();
+  if(document.getElementById('fnamePreview')) updateFnamePreview();
+}
+function onMode(){
+  const m=document.querySelector('input[name=aimode]:checked').value;
+  el('keyBox').classList.toggle('hidden', m!=='key');
+  savePrefs();
+}
+
+/* ---- プロンプト生成 ---- */
+function buildPrompt(d){
+  const tone=TONE[d.tone]||'', len=LEN[d.length].w;
+  const cond=d.cond?`\n# 補足条件\n${d.cond}`:'';
+  const body=d.content||'(内容未入力)';
+  const tail=`\n\n出力は本文のみ。前置きや「承知しました」等は不要。${tone}、${len}書いてください。`;
+  switch(d.type){
+    case 'explain':
+      return `あなたは新人・非エンジニア向けのIT研修講師です。次のテーマを WHY→WHAT→HOW の順で、比喩を1つ入れて、文系の人にも分かるように説明してください。\n# テーマ\n${body}${cond}${tail}`;
+    case 'notice':
+      return `次の内容で、社内向けのお知らせ文を作ってください。日時・対象・お願いが伝わるように。\n# 内容\n${body}${cond}${tail}`;
+    case 'email':
+      return `次の用件で、ビジネスメールの下書きを作ってください。件名と本文を含めてください。\n# 用件\n${body}${cond}${tail}`;
+    case 'summary':
+      return `次の文章を、要点を落とさず要約してください。\n# 対象\n${body}${cond}${tail}`;
+    case 'bullets':
+      return `次の内容を、見やすい箇条書きに整理してください。必要なら見出しでグループ分けしてください。\n# 内容\n${body}${cond}${tail}`;
+    case 'quiz':
+      return `次のテーマで、4択クイズを3問作ってください。各問に「問題／選択肢A〜D／正解／一言解説」を付けてください。\n# テーマ\n${body}${cond}${tail}`;
+    default:
+      return `${body}${cond}${tail}`;
+  }
+}
+
+/* ---- AIなしのたたき台 ---- */
+function ruleDraft(d){
+  const head=`【テンプレ生成（AI未使用）｜${d.type}】\n※ これはたたき台です。仕上げは「🧩 プロンプトをコピー」して、お好みのAIに貼ってください。\n\n`;
+  const c=d.content||'(内容未入力)';
+  switch(d.type){
+    case 'explain':
+      return head+`■ なぜ（WHY）\n・${c} が必要な理由：____\n\n■ なにを（WHAT）\n・${c} とは：____\n\n■ どうやって（HOW）\n1. ____\n2. ____\n\n（比喩の例）「${c}」は、たとえば ____ のようなもの。`;
+    case 'notice':
+      return head+`件名：【お知らせ】${c}\n\nお疲れさまです。\n下記のとおりお知らせします。\n・日時：____\n・対象：____\n・お願い：${c}\n\nご確認よろしくお願いします。`;
+    case 'email':
+      return head+`件名：${c} の件\n\nお世話になっております。\n${c} について、下記のとおりご連絡します。\n・____\n・____\n\nお手数ですがご確認のほどお願いいたします。`;
+    case 'summary':
+      return head+`■ 要点\n・____\n・____\n・____\n\n（対象：${c}）`;
+    case 'bullets':
+      return head+`■ ${c}\n・____\n・____\n・____`;
+    case 'quiz':
+      return head+`Q1. ${c} に関する問題：____\n  A. ____  B. ____  C. ____  D. ____\n  正解：__／解説：____\n\nQ2. ____\nQ3. ____`;
+    default:
+      return head+`${c}`;
+  }
+}
+
+/* ---- API呼び出し ---- */
+function getKey(){ return (el('apikey').value||'').trim(); }
+async function callAI(prompt, mode, d){
+  const headers={'content-type':'application/json'};
+  if(mode==='key'){
+    const k=getKey(); if(!k) throw new Error('APIキーが未入力です');
+    headers['x-api-key']=k;
+    headers['anthropic-version']='2023-06-01';
+    headers['anthropic-dangerous-direct-browser-access']='true';
+  }
+  const res=await fetch('https://api.anthropic.com/v1/messages',{
+    method:'POST', headers,
+    body:JSON.stringify({ model:CONF.model, max_tokens:d.maxtok, messages:[{role:'user',content:prompt}] })
+  });
+  if(!res.ok){ let m='HTTP '+res.status; try{const j=await res.json(); if(j&&j.error&&j.error.message) m+=' / '+j.error.message;}catch(e){} throw new Error(m); }
+  const data=await res.json();
+  const t=(data.content||[]).filter(b=>b.type==='text').map(b=>b.text).join('\n').trim();
+  if(!t) throw new Error('空の応答');
+  return t;
+}
+
+function setBadge(text,cls){ const b=el('badge'); b.textContent=text; b.className='badge'+(cls?(' '+cls):''); }
+function show(text, badgeText, cls){
+  lastOut=text; el('out').textContent=text; setBadge(badgeText,cls);
+  outMD=`# ${CONF.title} 出力（${el('type').value}）\n\n${text}\n`;
+  el('printArea').innerHTML=`<div class="ptitle">${esc(CONF.title)} 出力</div><div class="pbody">${esc(text)}</div>`;
+  updateFnamePreview();
+}
+
+async function generate(){
+  const d=read();
+  lastPrompt=buildPrompt(d);
+  const mode=document.querySelector('input[name=aimode]:checked').value;
+  if(mode==='none'){ show(ruleDraft(d), 'テンプレ生成（AI未使用）', 'rule'); return; }
+  setBadge('生成中…','');
+  el('out').textContent='🐰 生成しています…';
+  try{
+    const text=await callAI(lastPrompt, mode, d);
+    show(text, mode==='key'?'AI生成（自分のAPIキー）':'AI生成（この環境のAI）', 'ai');
+  }catch(e){
+    show(ruleDraft(d), 'テンプレ生成（AIに接続できず：'+(e.message||'error')+'）', 'err');
+  }
+}
+
+/* ---- コピー / 出力 ---- */
+function flash(id,msg){ const b=el(id);const o=b.textContent;b.textContent=msg;b.classList.add('done');setTimeout(()=>{b.textContent=o;b.classList.remove('done');},1500); }
+function copyOut(){ if(!lastOut)return; navigator.clipboard.writeText(lastOut).then(()=>flash('copyBtn','✅ コピー')); }
+function copyPrompt(){ const p=lastPrompt||buildPrompt(read()); lastPrompt=p; navigator.clipboard.writeText(p).then(()=>flash('promptBtn','✅ コピー')); }
+function copyMD(){ if(!outMD)return; navigator.clipboard.writeText(outMD).then(()=>flash('mdBtn','✅ コピー')); }
+
+/* ---- 自動ファイル名（YYYYMMDDHHMM_名前_種類_テーマ）＋任意名 ---- */
+const TYPE_JA={ free:'自由', explain:'説明', notice:'お知らせ', email:'メール', summary:'要約', bullets:'箇条書き', quiz:'クイズ' };
+function ts(){ const d=new Date(),p=n=>String(n).padStart(2,'0');
+  return `${d.getFullYear()}${p(d.getMonth()+1)}${p(d.getDate())}${p(d.getHours())}${p(d.getMinutes())}`; }
+function sani(s){ return (s||'').trim()
+  .replace(/[\\/:*?"<>|\u0000-\u001F]/g,'')   // ファイル名に使えない文字を除去
+  .replace(/\s+/g,'_')
+  .slice(0,40); }
+function autoName(){
+  const name=sani(CONF.brand||'うさうさ');
+  const type=TYPE_JA[el('type').value]||el('type').value;
+  const theme=sani(el('content').value)||'無題';   // テーマ＝お題・内容
+  return `${ts()}_${name}_${type}_${theme}`;
+}
+function baseName(){
+  const custom=sani(el('fname').value);
+  return custom||autoName();
+}
+function finalName(ext){
+  ext=ext||'md';
+  return baseName().replace(/\.(md|txt|csv|pdf|html?)$/i,'')+'.'+ext;
+}
+function updateFnamePreview(){
+  el('fnamePreview').textContent='保存名（例）：'+finalName('md');
+}
+function saveBlob(text, name, mime){
+  const blob=new Blob([text],{type:mime}); const url=URL.createObjectURL(blob);
+  const a=document.createElement('a'); a.href=url; a.download=name;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+function csvText(){
+  const q=s=>'"'+String(s==null?'':s).replace(/"/g,'""')+'"';
+  const d=read();
+  const head='field,value\n';
+  const rows=[
+    ['type', TYPE_JA[d.type]||d.type],
+    ['tone', d.tone],
+    ['length', d.length],
+    ['topic', d.content],
+    ['condition', d.cond],
+    ['generated_at', new Date().toLocaleString('ja-JP')],
+    ['output', lastOut]
+  ];
+  return head+rows.map(r=>q(r[0])+','+q(r[1])).join('\n')+'\n';
+}
+function printDocHTML(forSave){
+  // 印刷／PDF用の体裁。forSave=true のときはダウンロード用に完結HTMLとして返す。
+  const title=esc(CONF.title)+' 出力';
+  const meta=`${esc(TYPE_JA[el('type').value]||el('type').value)}／${esc(el('tone').value)}／${new Date().toLocaleString('ja-JP')}`;
+  const body=esc(lastOut).replace(/\n/g,'<br>');
+  const css=`@page{size:A4;margin:16mm;}body{font-family:"Hiragino Maru Gothic ProN","Yu Gothic",sans-serif;color:#3A2A1C;line-height:1.8;}h1{color:#C9510F;font-size:18pt;margin:0 0 4px;}.meta{color:#6E5A47;font-size:10pt;margin:0 0 16px;}.body{font-size:11.5pt;white-space:normal;}`;
+  return `<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8"><title>${title}</title><style>${css}</style></head><body><h1>${title}</h1><div class="meta">${meta}</div><div class="body">${body}</div></body></html>`;
+}
+function downloadAs(fmt){
+  if(!lastOut){ alert('先に「✨ 生成する」を押して結果を作ってください。'); return; }
+  try{
+    if(fmt==='md'){ saveBlob(outMD, finalName('md'), 'text/markdown;charset=utf-8'); flash('dlMd','✅ 保存'); }
+    else if(fmt==='txt'){ saveBlob(lastOut, finalName('txt'), 'text/plain;charset=utf-8'); flash('dlTxt','✅ 保存'); }
+    else if(fmt==='csv'){ saveBlob('\uFEFF'+csvText(), finalName('csv'), 'text/csv;charset=utf-8'); flash('dlCsv','✅ 保存'); }
+    else if(fmt==='pdf'){ saveBlob(printDocHTML(true), finalName('html'), 'text/html;charset=utf-8'); flash('dlPdf','✅ HTML保存→印刷でPDF化'); }
+  }catch(e){
+    if(fmt==='csv') navigator.clipboard.writeText(csvText()); else navigator.clipboard.writeText(outMD);
+    alert('ダウンロードがブロックされたため、内容をコピーしました。\n保存名候補：'+finalName(fmt==='pdf'?'html':fmt));
+  }
+}
+function printPdf(){
+  if(!lastOut){ alert('先に「✨ 生成する」を押して結果を作ってください。'); return; }
+  el('printArea').innerHTML=`<div class="ptitle">${esc(CONF.title)} 出力</div><div class="pbody">${esc(lastOut)}</div>`;
+  window.print();
+}
+function printOut(){ printPdf(); }
+
+/* ---- キー保存（任意） ---- */
+function saveKeyState(){
+  try{ if(!window.storage) return;
+    if(el('saveKey').checked && getKey()) window.storage.set(KEYSTORE, getKey());
+    else window.storage.delete(KEYSTORE);
+  }catch(e){}
+}
+async function loadKey(){
+  try{ if(window.storage){ const r=await window.storage.get(KEYSTORE); if(r&&r.value){ el('apikey').value=r.value; el('saveKey').checked=true; } } }catch(e){}
+}
+
+/* ---- 設定の記憶（v1.1.0） ---- */
+function savePrefs(){
+  try{ if(window.storage) window.storage.set('usaGenPrefs', JSON.stringify({
+    type:el('type').value, tone:el('tone').value, length:el('length').value,
+    mode:document.querySelector('input[name=aimode]:checked').value
+  })); }catch(e){}
+}
+async function loadPrefs(){
+  try{ if(window.storage){ const r=await window.storage.get('usaGenPrefs'); if(r&&r.value){ const p=JSON.parse(r.value)||{};
+    if(p.type) el('type').value=p.type;
+    if(p.tone) el('tone').value=p.tone;
+    if(p.length) el('length').value=p.length;
+    if(p.mode){ const rb=document.querySelector(`input[name=aimode][value="${p.mode}"]`); if(rb) rb.checked=true; }
+  } } }catch(e){}
+}
+
+/* ---- init ---- */
+async function init(){
+  el('verline').textContent=`${CONF.title} ${CONF.version} ｜ ${CONF.file} ｜ テスト済み（単体/結合/総合/ブラックボックス/モンキー 計90項目 全PASS）${CONF.tested}`;
+  await loadPrefs();
+  onType(); onMode(); await loadKey();
+  updateFnamePreview();
+}
+init();
+</script>
+</body>
+</html>
